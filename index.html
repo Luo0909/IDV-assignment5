@@ -120,96 +120,6 @@
             justify-content: center;
         }
         
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        
-        button {
-            padding: 8px 15px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-            font-size: 14px;
-        }
-        
-        button:hover {
-            background: #2980b9;
-        }
-        
-        .tooltip {
-            position: absolute;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            border-radius: 4px;
-            pointer-events: none;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 100;
-        }
-        
-        .legend {
-            display: flex;
-            justify-content: center;
-            margin-top: 15px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-        }
-        
-        .legend-color {
-            width: 15px;
-            height: 15px;
-            border-radius: 3px;
-        }
-        
-        /* Specific styles for visualizations */
-        .grid-background {
-            fill: none;
-            stroke: #e0e0e0;
-            stroke-width: 1;
-        }
-        .parallelogram {
-            fill: rgba(74, 144, 226, 0.3);
-            stroke: #3366cc;
-            stroke-width: 2;
-        }
-        .diagonal {
-            stroke: #ff6600;
-            stroke-width: 2;
-            stroke-dasharray: 5,5;
-            fill: none;
-        }
-        .point-label {
-            font-size: 14px;
-            font-weight: bold;
-            fill: #333;
-        }
-        .venn-circle {
-            fill-opacity: 0.5;
-            stroke: #333;
-            stroke-width: 2;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .venn-circle:hover {
-            stroke-width: 3;
-        }
-        
         /* PSI table styles */
         .psi-section {
             background: white;
@@ -602,73 +512,401 @@
                 <!-- Visualization 1: Parallelogram Mirror View -->
                 <div class="visualization-card">
                     <div class="card-header">Parallelogram Mirror View</div>
-                    <div class="card-content" id="parallelogram-container"></div>
+                    <div class="card-content" id="parallelogram-container">
+                        <svg width="500" height="400">
+                            <rect x="50" y="50" width="200" height="150" fill="rgba(74, 144, 226, 0.3)" stroke="#3366cc" stroke-width="2" />
+                            <rect x="150" y="150" width="200" height="150" fill="rgba(74, 144, 226, 0.3)" stroke="#3366cc" stroke-width="2" transform="scale(-1, 1) translate(-500, 0)" />
+                            <line x1="50" y1="50" x2="150" y2="150" stroke="#ff6600" stroke-width="2" stroke-dasharray="5,5" />
+                            <line x1="250" y1="50" x2="350" y2="150" stroke="#ff6600" stroke-width="2" stroke-dasharray="5,5" />
+                            <line x1="50" y1="200" x2="150" y2="300" stroke="#ff6600" stroke-width="2" stroke-dasharray="5,5" />
+                            <line x1="250" y1="200" x2="350" y2="300" stroke="#ff6600" stroke-width="2" stroke-dasharray="5,5" />
+                            <text x="50" y="40" class="point-label">A</text>
+                            <text x="250" y="40" class="point-label">B</text>
+                            <text x="50" y="220" class="point-label">C</text>
+                            <text x="250" y="220" class="point-label">D</text>
+                            <text x="350" y="40" class="point-label">A'</text>
+                            <text x="150" y="40" class="point-label">B'</text>
+                            <text x="350" y="220" class="point-label">C'</text>
+                            <text x="150" y="220" class="point-label">D'</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 2: Venn Diagram -->
                 <div class="visualization-card">
                     <div class="card-header">Venn Diagram</div>
-                    <div class="card-content" id="venn-container"></div>
+                    <div class="card-content" id="venn-container">
+                        <svg width="500" height="400">
+                            <circle cx="200" cy="200" r="120" fill="rgba(255, 0, 0, 0.5)" stroke="#333" stroke-width="2" class="venn-circle" />
+                            <circle cx="300" cy="200" r="120" fill="rgba(0, 255, 0, 0.5)" stroke="#333" stroke-width="2" class="venn-circle" />
+                            <circle cx="250" cy="280" r="120" fill="rgba(0, 0, 255, 0.5)" stroke="#333" stroke-width="2" class="venn-circle" />
+                            <text x="180" y="180" text-anchor="middle" font-size="16" font-weight="bold">Set A</text>
+                            <text x="320" y="180" text-anchor="middle" font-size="16" font-weight="bold">Set B</text>
+                            <text x="250" y="320" text-anchor="middle" font-size="16" font-weight="bold">Set C</text>
+                            <text x="250" y="220" text-anchor="middle" font-size="14" font-weight="bold">A∩B∩C</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 3: Grid Background with Arrow Path -->
                 <div class="visualization-card">
                     <div class="card-header">Grid Background with Arrow Path</div>
-                    <div class="card-content" id="grid-path-container"></div>
+                    <div class="card-content" id="grid-path-container">
+                        <svg width="500" height="400">
+                            <defs>
+                                <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+                                    <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#e0e0e0" stroke-width="1"/>
+                                </pattern>
+                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="#3498db"/>
+                                </marker>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#grid)" />
+                            <path d="M 50 100 C 150 50, 250 150, 350 100 S 450 200, 450 300" 
+                                  stroke="#3498db" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
+                            <circle cx="50" cy="100" r="5" fill="#e74c3c" />
+                            <circle cx="450" cy="300" r="5" fill="#e74c3c" />
+                            <text x="50" y="90" text-anchor="middle" font-size="12">Start</text>
+                            <text x="450" y="290" text-anchor="middle" font-size="12">End</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 4: Cross Validation Accuracy -->
                 <div class="visualization-card">
                     <div class="card-header">Cross Validation Accuracy</div>
-                    <div class="card-content" id="accuracy-container"></div>
+                    <div class="card-content" id="accuracy-container">
+                        <svg width="500" height="400">
+                            <!-- X-axis -->
+                            <line x1="50" y1="350" x2="450" y2="350" stroke="#333" stroke-width="2" />
+                            <!-- Y-axis -->
+                            <line x1="50" y1="50" x2="50" y2="350" stroke="#333" stroke-width="2" />
+                            
+                            <!-- Y-axis labels -->
+                            <text x="30" y="50" text-anchor="middle" font-size="12">100%</text>
+                            <text x="30" y="150" text-anchor="middle" font-size="12">75%</text>
+                            <text x="30" y="250" text-anchor="middle" font-size="12">50%</text>
+                            <text x="30" y="350" text-anchor="middle" font-size="12">25%</text>
+                            
+                            <!-- X-axis labels -->
+                            <text x="150" y="370" text-anchor="middle" font-size="12">Fold 1</text>
+                            <text x="250" y="370" text-anchor="middle" font-size="12">Fold 2</text>
+                            <text x="350" y="370" text-anchor="middle" font-size="12">Fold 3</text>
+                            
+                            <!-- Data points and line -->
+                            <circle cx="150" cy="100" r="5" fill="#3498db" />
+                            <circle cx="250" cy="150" r="5" fill="#3498db" />
+                            <circle cx="350" cy="120" r="5" fill="#3498db" />
+                            
+                            <path d="M 150 100 L 250 150 L 350 120" stroke="#3498db" stroke-width="2" fill="none" />
+                            
+                            <!-- Average line -->
+                            <line x1="50" y1="123" x2="450" y2="123" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,5" />
+                            <text x="470" y="123" text-anchor="start" font-size="12" fill="#e74c3c">Avg: 82.3%</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 5: Zhejiang Map -->
                 <div class="visualization-card">
                     <div class="card-header">Zhejiang Map</div>
-                    <div class="card-content" id="map-container"></div>
+                    <div class="card-content" id="map-container">
+                        <svg width="500" height="400" viewBox="0 0 500 400">
+                            <!-- Simplified Zhejiang province outline -->
+                            <path d="M 100 100 L 150 80 L 200 120 L 250 100 L 300 150 L 350 120 L 400 180 L 380 250 L 320 280 L 250 220 L 180 260 L 120 200 Z" 
+                                  fill="#a8d5e5" stroke="#2c3e50" stroke-width="2" />
+                            
+                            <!-- Major cities -->
+                            <circle cx="200" cy="150" r="8" fill="#e74c3c" />
+                            <text x="210" y="145" font-size="12" font-weight="bold">Hangzhou</text>
+                            
+                            <circle cx="280" cy="180" r="8" fill="#e74c3c" />
+                            <text x="290" y="175" font-size="12" font-weight="bold">Ningbo</text>
+                            
+                            <circle cx="150" cy="200" r="8" fill="#e74c3c" />
+                            <text x="160" y="195" font-size="12" font-weight="bold">Wenzhou</text>
+                            
+                            <circle cx="320" cy="220" r="6" fill="#3498db" />
+                            <text x="330" y="215" font-size="10">Shaoxing</text>
+                            
+                            <circle cx="250" cy="250" r="6" fill="#3498db" />
+                            <text x="260" y="245" font-size="10">Jinhua</text>
+                            
+                            <!-- Title -->
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Zhejiang Province</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 6: Mathematical Plots -->
                 <div class="visualization-card">
                     <div class="card-header">Mathematical Plots</div>
-                    <div class="card-content" id="math-plots-container"></div>
+                    <div class="card-content" id="math-plots-container">
+                        <svg width="500" height="400" viewBox="0 0 500 400">
+                            <!-- Coordinate system -->
+                            <line x1="50" y1="200" x2="450" y2="200" stroke="#333" stroke-width="1" />
+                            <line x1="250" y1="50" x2="250" y2="350" stroke="#333" stroke-width="1" />
+                            
+                            <!-- Sine wave -->
+                            <path d="M 50 200 
+                                     C 100 150, 150 250, 200 200
+                                     C 250 150, 300 250, 350 200
+                                     C 400 150, 450 250, 450 200" 
+                                  stroke="#3498db" stroke-width="2" fill="none" />
+                            
+                            <!-- Cosine wave -->
+                            <path d="M 50 250 
+                                     C 100 300, 150 200, 200 250
+                                     C 250 300, 300 200, 350 250
+                                     C 400 300, 450 200, 450 250" 
+                                  stroke="#e74c3c" stroke-width="2" fill="none" />
+                            
+                            <!-- Parabola -->
+                            <path d="M 50 350 Q 250 50 450 350" 
+                                  stroke="#2ecc71" stroke-width="2" fill="none" />
+                            
+                            <!-- Labels -->
+                            <text x="470" y="200" text-anchor="start" font-size="12">x</text>
+                            <text x="250" y="30" text-anchor="middle" font-size="12">y</text>
+                            <text x="100" y="170" text-anchor="middle" font-size="10" fill="#3498db">sin(x)</text>
+                            <text x="100" y="280" text-anchor="middle" font-size="10" fill="#e74c3c">cos(x)</text>
+                            <text x="400" y="100" text-anchor="middle" font-size="10" fill="#2ecc71">x²</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 7: Word Network -->
                 <div class="visualization-card">
                     <div class="card-header">Word Network</div>
-                    <div class="card-content" id="network-container"></div>
+                    <div class="card-content" id="network-container">
+                        <svg width="500" height="400">
+                            <!-- Central node -->
+                            <circle cx="250" cy="200" r="30" fill="#3498db" />
+                            <text x="250" y="205" text-anchor="middle" fill="white" font-weight="bold">Data</text>
+                            
+                            <!-- Connected nodes -->
+                            <circle cx="150" cy="120" r="20" fill="#e74c3c" />
+                            <text x="150" y="125" text-anchor="middle" fill="white" font-size="10">Analysis</text>
+                            
+                            <circle cx="350" cy="120" r="20" fill="#e74c3c" />
+                            <text x="350" y="125" text-anchor="middle" fill="white" font-size="10">Visualization</text>
+                            
+                            <circle cx="150" cy="280" r="20" fill="#e74c3c" />
+                            <text x="150" y="285" text-anchor="middle" fill="white" font-size="10">Processing</text>
+                            
+                            <circle cx="350" cy="280" r="20" fill="#e74c3c" />
+                            <text x="350" y="285" text-anchor="middle" fill="white" font-size="10">Science</text>
+                            
+                            <!-- Secondary nodes -->
+                            <circle cx="80" cy="80" r="15" fill="#2ecc71" />
+                            <text x="80" y="85" text-anchor="middle" fill="white" font-size="8">Statistics</text>
+                            
+                            <circle cx="420" cy="80" r="15" fill="#2ecc71" />
+                            <text x="420" y="85" text-anchor="middle" fill="white" font-size="8">Charts</text>
+                            
+                            <circle cx="80" cy="320" r="15" fill="#2ecc71" />
+                            <text x="80" y="325" text-anchor="middle" fill="white" font-size="8">Cleaning</text>
+                            
+                            <circle cx="420" cy="320" r="15" fill="#2ecc71" />
+                            <text x="420" y="325" text-anchor="middle" fill="white" font-size="8">ML</text>
+                            
+                            <!-- Connections -->
+                            <line x1="250" y1="200" x2="150" y2="120" stroke="#7f8c8d" stroke-width="2" />
+                            <line x1="250" y1="200" x2="350" y2="120" stroke="#7f8c8d" stroke-width="2" />
+                            <line x1="250" y1="200" x2="150" y2="280" stroke="#7f8c8d" stroke-width="2" />
+                            <line x1="250" y1="200" x2="350" y2="280" stroke="#7f8c8d" stroke-width="2" />
+                            
+                            <line x1="150" y1="120" x2="80" y2="80" stroke="#7f8c8d" stroke-width="1" />
+                            <line x1="350" y1="120" x2="420" y2="80" stroke="#7f8c8d" stroke-width="1" />
+                            <line x1="150" y1="280" x2="80" y2="320" stroke="#7f8c8d" stroke-width="1" />
+                            <line x1="350" y1="280" x2="420" y2="320" stroke="#7f8c8d" stroke-width="1" />
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 8: Model Frequency Distribution -->
                 <div class="visualization-card">
                     <div class="card-header">Model Frequency Distribution</div>
-                    <div class="card-content" id="frequency-container"></div>
+                    <div class="card-content" id="frequency-container">
+                        <svg width="500" height="400">
+                            <!-- X-axis -->
+                            <line x1="50" y1="350" x2="450" y2="350" stroke="#333" stroke-width="2" />
+                            <!-- Y-axis -->
+                            <line x1="50" y1="50" x2="50" y2="350" stroke="#333" stroke-width="2" />
+                            
+                            <!-- Y-axis labels -->
+                            <text x="30" y="50" text-anchor="middle" font-size="12">100</text>
+                            <text x="30" y="150" text-anchor="middle" font-size="12">75</text>
+                            <text x="30" y="250" text-anchor="middle" font-size="12">50</text>
+                            <text x="30" y="350" text-anchor="middle" font-size="12">25</text>
+                            
+                            <!-- Bars -->
+                            <rect x="80" y="250" width="40" height="100" fill="#3498db" />
+                            <text x="100" y="245" text-anchor="middle" font-size="12">CNN</text>
+                            
+                            <rect x="140" y="200" width="40" height="150" fill="#3498db" />
+                            <text x="160" y="195" text-anchor="middle" font-size="12">RNN</text>
+                            
+                            <rect x="200" y="150" width="40" height="200" fill="#3498db" />
+                            <text x="220" y="145" text-anchor="middle" font-size="12">LSTM</text>
+                            
+                            <rect x="260" y="100" width="40" height="250" fill="#3498db" />
+                            <text x="280" y="95" text-anchor="middle" font-size="12">Transformer</text>
+                            
+                            <rect x="320" y="180" width="40" height="170" fill="#3498db" />
+                            <text x="340" y="175" text-anchor="middle" font-size="12">GAN</text>
+                            
+                            <rect x="380" y="220" width="40" height="130" fill="#3498db" />
+                            <text x="400" y="215" text-anchor="middle" font-size="12">BERT</text>
+                            
+                            <!-- Title -->
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Model Usage Frequency</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 9: Transformer Architecture -->
                 <div class="visualization-card">
                     <div class="card-header">Transformer Architecture</div>
-                    <div class="card-content" id="transformer-container"></div>
+                    <div class="card-content" id="transformer-container">
+                        <svg width="500" height="400">
+                            <!-- Input -->
+                            <rect x="50" y="150" width="80" height="40" fill="#3498db" stroke="#2c3e50" stroke-width="2" />
+                            <text x="90" y="175" text-anchor="middle" fill="white" font-size="10">Input</text>
+                            
+                            <!-- Embedding -->
+                            <rect x="150" y="150" width="80" height="40" fill="#e74c3c" stroke="#2c3e50" stroke-width="2" />
+                            <text x="190" y="175" text-anchor="middle" fill="white" font-size="10">Embedding</text>
+                            
+                            <!-- Positional Encoding -->
+                            <rect x="250" y="150" width="80" height="40" fill="#2ecc71" stroke="#2c3e50" stroke-width="2" />
+                            <text x="290" y="175" text-anchor="middle" fill="white" font-size="10">Positional Encoding</text>
+                            
+                            <!-- Encoder Stack -->
+                            <rect x="350" y="50" width="100" height="300" fill="#9b59b6" stroke="#2c3e50" stroke-width="2" />
+                            <text x="400" y="30" text-anchor="middle" font-size="12" font-weight="bold">Encoder</text>
+                            
+                            <!-- Encoder Layers -->
+                            <rect x="370" y="80" width="60" height="40" fill="#8e44ad" stroke="#2c3e50" stroke-width="1" />
+                            <text x="400" y="100" text-anchor="middle" fill="white" font-size="8">Self-Attention</text>
+                            
+                            <rect x="370" y="130" width="60" height="40" fill="#8e44ad" stroke="#2c3e50" stroke-width="1" />
+                            <text x="400" y="150" text-anchor="middle" fill="white" font-size="8">Feed Forward</text>
+                            
+                            <rect x="370" y="180" width="60" height="40" fill="#8e44ad" stroke="#2c3e50" stroke-width="1" />
+                            <text x="400" y="200" text-anchor="middle" fill="white" font-size="8">Add & Norm</text>
+                            
+                            <!-- Repeat pattern -->
+                            <text x="400" y="230" text-anchor="middle" font-size="10">...</text>
+                            
+                            <rect x="370" y="250" width="60" height="40" fill="#8e44ad" stroke="#2c3e50" stroke-width="1" />
+                            <text x="400" y="270" text-anchor="middle" fill="white" font-size="8">Layer N</text>
+                            
+                            <!-- Output -->
+                            <rect x="470" y="150" width="80" height="40" fill="#3498db" stroke="#2c3e50" stroke-width="2" />
+                            <text x="510" y="175" text-anchor="middle" fill="white" font-size="10">Output</text>
+                            
+                            <!-- Arrows -->
+                            <line x1="130" y1="170" x2="150" y2="170" stroke="#333" stroke-width="2" />
+                            <line x1="230" y1="170" x2="250" y2="170" stroke="#333" stroke-width="2" />
+                            <line x1="330" y1="170" x2="350" y2="170" stroke="#333" stroke-width="2" />
+                            <line x1="450" y1="170" x2="470" y2="170" stroke="#333" stroke-width="2" />
+                            
+                            <!-- Title -->
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Transformer Architecture</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 10: Interactive Stick Figure -->
                 <div class="visualization-card">
                     <div class="card-header">Interactive Stick Figure</div>
-                    <div class="card-content" id="stick-figure-container"></div>
+                    <div class="card-content" id="stick-figure-container">
+                        <svg width="500" height="400">
+                            <!-- Head -->
+                            <circle cx="250" cy="100" r="30" fill="#f1c40f" stroke="#2c3e50" stroke-width="2" />
+                            
+                            <!-- Body -->
+                            <line x1="250" y1="130" x2="250" y2="230" stroke="#2c3e50" stroke-width="3" />
+                            
+                            <!-- Arms -->
+                            <line x1="250" y1="150" x2="200" y2="180" stroke="#2c3e50" stroke-width="3" />
+                            <line x1="250" y1="150" x2="300" y2="180" stroke="#2c3e50" stroke-width="3" />
+                            
+                            <!-- Legs -->
+                            <line x1="250" y1="230" x2="220" y2="300" stroke="#2c3e50" stroke-width="3" />
+                            <line x1="250" y1="230" x2="280" y2="300" stroke="#2c3e50" stroke-width="3" />
+                            
+                            <!-- Face -->
+                            <circle cx="240" cy="90" r="5" fill="#2c3e50" />
+                            <circle cx="260" cy="90" r="5" fill="#2c3e50" />
+                            <path d="M 235 110 Q 250 120 265 110" stroke="#2c3e50" stroke-width="2" fill="none" />
+                            
+                            <!-- Ground -->
+                            <line x1="50" y1="300" x2="450" y2="300" stroke="#7f8c8d" stroke-width="3" />
+                            
+                            <!-- Title -->
+                            <text x="250" y="350" text-anchor="middle" font-size="16" font-weight="bold">Interactive Stick Figure</text>
+                            <text x="250" y="370" text-anchor="middle" font-size="12">(Hover to see animation)</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 11: Bimodal Probability Density -->
                 <div class="visualization-card">
                     <div class="card-header">Bimodal Probability Density</div>
-                    <div class="card-content" id="probability-container"></div>
+                    <div class="card-content" id="probability-container">
+                        <svg width="500" height="400">
+                            <!-- X-axis -->
+                            <line x1="50" y1="350" x2="450" y2="350" stroke="#333" stroke-width="2" />
+                            <!-- Y-axis -->
+                            <line x1="50" y1="50" x2="50" y2="350" stroke="#333" stroke-width="2" />
+                            
+                            <!-- First distribution -->
+                            <path d="M 50 350 
+                                     Q 150 200 250 350
+                                     Q 350 200 450 350" 
+                                  stroke="#3498db" stroke-width="2" fill="rgba(52, 152, 219, 0.2)" />
+                            
+                            <!-- Second distribution -->
+                            <path d="M 50 350 
+                                     Q 150 100 250 350
+                                     Q 350 100 450 350" 
+                                  stroke="#e74c3c" stroke-width="2" fill="rgba(231, 76, 60, 0.2)" />
+                            
+                            <!-- Labels -->
+                            <text x="100" y="180" text-anchor="middle" font-size="12" fill="#3498db">Distribution 1</text>
+                            <text x="100" y="80" text-anchor="middle" font-size="12" fill="#e74c3c">Distribution 2</text>
+                            
+                            <!-- Title -->
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Bimodal Probability Density</text>
+                        </svg>
+                    </div>
                 </div>
                 
                 <!-- Visualization 12: Square Overlap -->
                 <div class="visualization-card">
                     <div class="card-header">Square Overlap</div>
-                    <div class="card-content" id="square-overlap-container"></div>
+                    <div class="card-content" id="square-overlap-container">
+                        <svg width="500" height="400">
+                            <!-- First square -->
+                            <rect x="150" y="150" width="200" height="200" fill="rgba(52, 152, 219, 0.7)" stroke="#2980b9" stroke-width="2" />
+                            
+                            <!-- Second square -->
+                            <rect x="200" y="100" width="200" height="200" fill="rgba(231, 76, 60, 0.7)" stroke="#c0392b" stroke-width="2" />
+                            
+                            <!-- Overlap area -->
+                            <rect x="200" y="150" width="150" height="150" fill="rgba(155, 89, 182, 0.7)" stroke="#8e44ad" stroke-width="2" />
+                            
+                            <!-- Labels -->
+                            <text x="250" y="250" text-anchor="middle" fill="white" font-weight="bold">Overlap Area</text>
+                            <text x="200" y="80" text-anchor="middle" font-size="12" fill="#c0392b">Square B</text>
+                            <text x="150" y="140" text-anchor="end" font-size="12" fill="#2980b9">Square A</text>
+                            
+                            <!-- Title -->
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Square Overlap Visualization</text>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
@@ -783,114 +1021,6 @@
                             <img src="https://www.svgrepo.com/show/503853/weather.svg" width="100" height="100">
                         </td>
                     </tr>
-                    
-                    <tr>
-                        <td class="original">
-                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" width="100" height="100">
-                        </td>
-                        <td class="mirror">
-                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" width="100" height="100">
-                        </td>
-                        <td class="rotate180">
-                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" width="100" height="100">
-                        </td>
-                        <td class="squeeze">
-                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" width="100" height="100">
-                        </td>
-                        <td class="grayscale">
-                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" width="100" height="100">
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="original">
-                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" width="100" height="100">
-                        </td>
-                        <td class="mirror">
-                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" width="100" height="100">
-                        </td>
-                        <td class="rotate180">
-                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" width="100" height="100">
-                        </td>
-                        <td class="squeeze">
-                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" width="100" height="100">
-                        </td>
-                        <td class="grayscale">
-                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" width="100" height="100">
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="original">
-                            <img src="https://www.svgrepo.com/show/530557/duck.svg" width="100" height="100">
-                        </td>
-                        <td class="mirror">
-                            <img src="https://www.svgrepo.com/show/530557/duck.svg" width="100" height="100">
-                        </td>
-                        <td class="rotate180">
-                            <img src="https://www.svgrepo.com/show/530557/duck.svg" width="100" height="100">
-                        </td>
-                        <td class="squeeze">
-                            <img src="https://www.svgrepo.com/show/530557/duck.svg" width="100" height="100">
-                        </td>
-                        <td class="grayscale">
-                            <img src="https://www.svgrepo.com/show/530557/duck.svg" width="100" height="100">
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="original">
-                            <img src="https://www.svgrepo.com/show/468604/dome.svg" width="100" height="100">
-                        </td>
-                        <td class="mirror">
-                            <img src="https://www.svgrepo.com/show/468604/dome.svg" width="100" height="100">
-                        </td>
-                        <td class="rotate180">
-                            <img src="https://www.svgrepo.com/show/468604/dome.svg" width="100" height="100">
-                        </td>
-                        <td class="squeeze">
-                            <img src="https://www.svgrepo.com/show/468604/dome.svg" width="100" height="100">
-                        </td>
-                        <td class="grayscale">
-                            <img src="https://www.svgrepo.com/show/468604/dome.svg" width="100" height="100">
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="original">
-                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" width="100" height="100">
-                        </td>
-                        <td class="mirror">
-                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" width="100" height="100">
-                        </td>
-                        <td class="rotate180">
-                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" width="100" height="100">
-                        </td>
-                        <td class="squeeze">
-                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" width="100" height="100">
-                        </td>
-                        <td class="grayscale">
-                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" width="100" height="100">
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="original">
-                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" width="100" height="100">
-                        </td>
-                        <td class="mirror">
-                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" width="100" height="100">
-                        </td>
-                        <td class="rotate180">
-                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" width="100" height="100">
-                        </td>
-                        <td class="squeeze">
-                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" width="100" height="100">
-                        </td>
-                        <td class="grayscale">
-                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" width="100" height="100">
-                        </td>
-                    </tr>
                 </table>
             </div>
         </div>
@@ -919,51 +1049,21 @@
                                 <option value="Certified">Certified Robust Accuracy</option>
                             </select>
                         </div>
-                        
-                        <div class="control-group">
-                            <label for="modelFilter" class="dashboard-label">Filter Models:</label>
-                            <select id="modelFilter" class="dashboard-select">
-                                <option value="All">All Models</option>
-                            </select>
-                        </div>
                     </div>
                     
                     <div class="charts-container">
                         <div class="chart">
-                            <div class="chart-title">Radar Chart Analysis</div>
+                            <div class="chart-title">Performance Comparison</div>
                             <div class="radar-container">
                                 <svg id="radarChart" width="500" height="500"></svg>
                             </div>
-                            <div class="dashboard-legend" id="radarLegend"></div>
                         </div>
-                        
-                        <div class="chart">
-                            <div class="chart-title">Heatmap Analysis</div>
-                            <div class="heatmap-container">
-                                <svg id="heatmap" width="500" height="500"></svg>
-                            </div>
-                            <div class="dashboard-legend" id="heatmapLegend"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Data 2: Adversarial Robustness Heatmap -->
-                <div class="dashboard-container">
-                    <div class="section-header">Adversarial Robustness Analysis</div>
-                    <div class="dashboard-description">
-                        This heatmap shows the accuracy of different defense models under various adversarial attacks. 
-                        Green indicates higher accuracy (better robustness), while red indicates lower accuracy.
-                    </div>
-                    <div class="chart-container">
-                        <div id="robustnessHeatmap"></div>
-                        <div id="robustnessLegend"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="tooltip" id="tooltip"></div>
     <div class="dashboard-tooltip" id="dashboard-tooltip"></div>
 
     <script>
@@ -993,20 +1093,6 @@
                 });
             });
             
-            // Initialize all visualizations when the page loads
-            setTimeout(initParallelogram, 100);
-            setTimeout(initVenn, 200);
-            setTimeout(initGridPath, 300);
-            setTimeout(initAccuracy, 400);
-            setTimeout(initMap, 500);
-            setTimeout(initMathPlots, 600);
-            setTimeout(initNetwork, 700);
-            setTimeout(initFrequency, 800);
-            setTimeout(initTransformer, 900);
-            setTimeout(initStickFigure, 1000);
-            setTimeout(initProbability, 1100);
-            setTimeout(initSquareOverlap, 1200);
-            
             // Initialize PSI data
             fetchPSIData();
             
@@ -1016,15 +1102,68 @@
                     initModelPerformanceDashboard();
                 }, 100);
             }
+            
+            // Add interactivity to stick figure
+            const stickFigure = document.getElementById('stick-figure-container');
+            if (stickFigure) {
+                stickFigure.addEventListener('mouseover', function() {
+                    const svg = this.querySelector('svg');
+                    const arms = svg.querySelectorAll('line:nth-child(3), line:nth-child(4)');
+                    const legs = svg.querySelectorAll('line:nth-child(5), line:nth-child(6)');
+                    
+                    arms.forEach(arm => {
+                        arm.style.transform = 'rotate(10deg)';
+                        arm.style.transformOrigin = '250px 150px';
+                    });
+                    
+                    legs.forEach(leg => {
+                        leg.style.transform = 'rotate(5deg)';
+                        leg.style.transformOrigin = '250px 230px';
+                    });
+                });
+                
+                stickFigure.addEventListener('mouseout', function() {
+                    const svg = this.querySelector('svg');
+                    const arms = svg.querySelectorAll('line:nth-child(3), line:nth-child(4)');
+                    const legs = svg.querySelectorAll('line:nth-child(5), line:nth-child(6)');
+                    
+                    arms.forEach(arm => {
+                        arm.style.transform = 'rotate(0deg)';
+                    });
+                    
+                    legs.forEach(leg => {
+                        leg.style.transform = 'rotate(0deg)';
+                    });
+                });
+            }
         });
 
         // PSI Data Fetching Function
         async function fetchPSIData() {
             try {
-                const response = await fetch('https://api.data.gov.sg/v1/environment/psi');
-                const data = await response.json();
+                // Mock data for demonstration
+                const mockData = {
+                    items: [{
+                        update_timestamp: "2023-10-15T12:00:00+08:00",
+                        readings: {
+                            "o3_sub_index": {central: 12, west: 10, east: 14, north: 11, south: 13, national: 12},
+                            "pm10_twenty_four_hourly": {central: 32, west: 28, east: 35, north: 30, south: 33, national: 31},
+                            "pm10_sub_index": {central: 32, west: 28, east: 35, north: 30, south: 33, national: 31},
+                            "co_sub_index": {central: 6, west: 5, east: 7, north: 6, south: 6, national: 6},
+                            "pm25_twenty_four_hourly": {central: 18, west: 16, east: 20, north: 17, south: 19, national: 18},
+                            "so2_sub_index": {central: 4, west: 3, east: 5, north: 4, south: 4, national: 4},
+                            "co_eight_hour_max": {central: 0.6, west: 0.5, east: 0.7, north: 0.6, south: 0.6, national: 0.6},
+                            "no2_one_hour_max": {central: 24, west: 22, east: 26, north: 23, south: 25, national: 24},
+                            "so2_twenty_four_hourly": {central: 4, west: 3, east: 5, north: 4, south: 4, national: 4},
+                            "pm25_sub_index": {central: 18, west: 16, east: 20, north: 17, south: 19, national: 18},
+                            "psi_twenty_four_hourly": {central: 32, west: 28, east: 35, north: 30, south: 33, national: 31}
+                        }
+                    }]
+                };
 
-                const timestamp = data.items[0].update_timestamp || data.items[0].timestamp;
+                const data = mockData; // In a real implementation, you would fetch from the API
+
+                const timestamp = data.items[0].update_timestamp;
                 document.getElementById("timestring").textContent = `Timestamp: ${timestamp}`;
 
                 const readings = data.items[0].readings;
@@ -1054,76 +1193,36 @@
         function initModelPerformanceDashboard() {
             // Data 1: Model Performance
             const data1 = [
-                {Approach: "ERM", "Std Acc - CIFAR100": 81.03, "Std Acc - CIFAR10": 94.85, "Std Acc - SVHN": 94.44, "Std Acc - MNIST": 99.37, "CRR - CIFAR100": 9.28, "CRR - CIFAR10": 1.25, "CRR - SVHN": 52.72, "CRR - MNIST": 26.01, "CRA - CIFAR100": 4.52, "CRA - CIFAR10": 1.25, "CRA - SVHN": 51.04, "CRA - MNIST": 24.96},
-                {Approach: "DA", "Std Acc - CIFAR100": 78.27, "Std Acc - CIFAR10": 94.21, "Std Acc - SVHN": 94.69, "Std Acc - MNIST": 99.42, "CRR - CIFAR100": 15.04, "CRR - CIFAR10": 81.08, "CRR - SVHN": 82.08, "CRR - MNIST": 85.23, "CRA - CIFAR100": 6.15, "CRA - CIFAR10": 76.07, "CRA - SVHN": 82.01, "CRA - MNIST": 84.12},
-                {Approach: "PGDT", "Std Acc - CIFAR100": 64.35, "Std Acc - CIFAR10": 84.38, "Std Acc - SVHN": 91.19, "Std Acc - MNIST": 99.16, "CRR - CIFAR100": 57.07, "CRR - CIFAR10": 87.07, "CRR - SVHN": 87.89, "CRR - MNIST": 94.65, "CRA - CIFAR100": 32.93, "CRA - CIFAR10": 82.9, "CRA - SVHN": 86.68, "CRA - MNIST": 94.63},
-                {Approach: "TRADES", "Std Acc - CIFAR100": 62.55, "Std Acc - CIFAR10": 80.42, "Std Acc - SVHN": 86.16, "Std Acc - MNIST": 99.1, "CRR - CIFAR100": 59.27, "CRR - CIFAR10": 88.54, "CRR - SVHN": 87.89, "CRR - MNIST": 94.76, "CRA - CIFAR100": 38.85, "CRA - CIFAR10": 78.8, "CRA - SVHN": 84.76, "CRA - MNIST": 94.61},
-                {Approach: "MART", "Std Acc - CIFAR100": 63.68, "Std Acc - CIFAR10": 81.54, "Std Acc - SVHN": 90.2, "Std Acc - MNIST": 98.94, "CRR - CIFAR100": 58.79, "CRR - CIFAR10": 78.9, "CRR - SVHN": 85.23, "CRR - MNIST": 94.13, "CRA - CIFAR100": 49.37, "CRA - CIFAR10": 72.21, "CRA - SVHN": 78.82, "CRA - MNIST": 94.09},
-                {Approach: "RS", "Std Acc - CIFAR100": 56.87, "Std Acc - CIFAR10": 89.45, "Std Acc - SVHN": 88.35, "Std Acc - MNIST": 97.16, "CRR - CIFAR100": 60.38, "CRR - CIFAR10": 90, "CRR - SVHN": 76.29, "CRR - MNIST": 87.15, "CRA - CIFAR100": 47.5, "CRA - CIFAR10": 87.98, "CRA - SVHN": 70.64, "CRA - MNIST": 86.29},
-                {Approach: "IBP", "Std Acc - CIFAR100": 39.45, "Std Acc - CIFAR10": 48.4, "Std Acc - SVHN": 73.09, "Std Acc - MNIST": 97.78, "CRR - CIFAR100": 49.34, "CRR - CIFAR10": 54.7, "CRR - SVHN": 61.94, "CRR - MNIST": 89.18, "CRA - CIFAR100": 29.2, "CRA - CIFAR10": 40, "CRA - SVHN": 57.26, "CRA - MNIST": 88.51},
-                {Approach: "PRL", "Std Acc - CIFAR100": 64.89, "Std Acc - CIFAR10": 93.82, "Std Acc - SVHN": 92, "Std Acc - MNIST": 99.32, "CRR - CIFAR100": 56.71, "CRR - CIFAR10": 90.71, "CRR - SVHN": 93.11, "CRR - MNIST": 96.03, "CRA - CIFAR100": 50.77, "CRA - CIFAR10": 90.63, "CRA - SVHN": 91.07, "CRA - MNIST": 95.01},
-                {Approach: "TandT", "Std Acc - CIFAR100": 65.56, "Std Acc - CIFAR10": 94.23, "Std Acc - SVHN": 94.79, "Std Acc - MNIST": 99.32, "CRR - CIFAR100": 62.05, "CRR - CIFAR10": 95.08, "CRR - SVHN": 93.15, "CRR - MNIST": 97.8, "CRA - CIFAR100": 52.07, "CRA - CIFAR10": 91.75, "CRA - SVHN": 92.81, "CRA - MNIST": 96.8},
-            ];
-
-            // Data 2: Adversarial Robustness
-            const data2 = [
-                { attack: "No Attack", ERM: 94.85, DA: 94.21, PGDT: 84.38, TRADES: 80.42, MART: 81.54, RS: 89.45, IBP: 48.4, PRL: 93.82, TandT: 94.23 },
-                { attack: "TIFGSM", ERM: 35.1, DA: 33, PGDT: 65.7, TRADES: 62.9, MART: 69.1, RS: 45.4, IBP: 40.2, PRL: 34, TandT: 92.8 },
-                { attack: "MIFGSM", ERM: 0, DA: 0, PGDT: 50.9, TRADES: 51.9, MART: 50.5, RS: 5.8, IBP: 38.1, PRL: 0, TandT: 92.8 },
-                { attack: "DIFGSM", ERM: 1, DA: 0, PGDT: 51.75, TRADES: 50.5, MART: 53.6, RS: 4.1, IBP: 38.1, PRL: 3.1, TandT: 92.8 },
-                { attack: "VMIFGSM", ERM: 0, DA: 0, PGDT: 51.1, TRADES: 50.9, MART: 51.9, RS: 4.1, IBP: 38.1, PRL: 0, TandT: 93.9 },
-                { attack: "TPGD", ERM: 38.1, DA: 39.2, PGDT: 69.3, TRADES: 69.1, MART: 70.1, RS: 48.5, IBP: 50, PRL: 28.9, TandT: 91.8 },
-                { attack: "FGSM", ERM: 29.9, DA: 25.8, PGDT: 57.95, TRADES: 54.6, MART: 61.9, RS: 28.9, IBP: 38.1, PRL: 25.8, TandT: 93.8 },
-                { attack: "RFGSM", ERM: 0, DA: 0, PGDT: 49.15, TRADES: 50.4, MART: 48.5, RS: 3.7, IBP: 38.1, PRL: 0, TandT: 90 },
-                { attack: "BIM", ERM: 0, DA: 0, PGDT: 52, TRADES: 57.2, MART: 47.4, RS: 2.1, IBP: 38.1, PRL: 0, TandT: 90.7 },
-                { attack: "FAB", ERM: 1, DA: 2.1, PGDT: 43, TRADES: 46.4, MART: 40.2, RS: 5.3, IBP: 38.1, PRL: 4.1, TandT: 90.1 },
-                { attack: "CW", ERM: 0, DA: 0, PGDT: 32.2, TRADES: 35.1, MART: 29.9, RS: 1, IBP: 40.2, PRL: 1, TandT: 92.9 },
-                { attack: "UPGD", ERM: 0, DA: 0, PGDT: 49.85, TRADES: 50.5, MART: 49.8, RS: 5.1, IBP: 38.1, PRL: 0, TandT: 93.8 },
-                { attack: "FFGSM", ERM: 19.6, DA: 23.7, PGDT: 60.55, TRADES: 55.7, MART: 66, RS: 33, IBP: 42.3, PRL: 29.9, TandT: 92.8 },
-                { attack: "Jitter", ERM: 11.3, DA: 12.4, PGDT: 48.15, TRADES: 47.4, MART: 49.5, RS: 34, IBP: 39.2, PRL: 24.7, TandT: 90.7 },
-                { attack: "PGD", ERM: 0, DA: 0, PGDT: 57.4, TRADES: 54.6, MART: 60.8, RS: 7.2, IBP: 40.2, PRL: 0, TandT: 91.8 },
-                { attack: "EOTPGD", ERM: 0, DA: 0, PGDT: 50.1, TRADES: 50.3, MART: 50.5, RS: 3, IBP: 38.1, PRL: 0, TandT: 90.7 },
-                { attack: "APGD", ERM: 0, DA: 0, PGDT: 48.4, TRADES: 51, MART: 46.4, RS: 1, IBP: 38.1, PRL: 0, TandT: 90.7 },
-                { attack: "NIFGSM", ERM: 0, DA: 0, PGDT: 57.95, TRADES: 56.7, MART: 59.8, RS: 7.2, IBP: 38.1, PRL: 1, TandT: 92.8 },
-                { attack: "SiniFGSM", ERM: 4.1, DA: 1, PGDT: 59, TRADES: 56.7, MART: 61.9, RS: 23.7, IBP: 38.1, PRL: 12.4, TandT: 93.7 },
-                { attack: "VNIFGSM", ERM: 0, DA: 0, PGDT: 50.45, TRADES: 53, MART: 48.5, RS: 5.1, IBP: 38.1, PRL: 0, TandT: 92.9 },
-                { attack: "APGDT", ERM: 0, DA: 0, PGDT: 40.9, TRADES: 44.3, MART: 38.1, RS: 0, IBP: 38.1, PRL: 0, TandT: 88.7 },
-                { attack: "Square", ERM: 0, DA: 1, PGDT: 50.4, TRADES: 54, MART: 47.4, RS: 3.1, IBP: 38.1, PRL: 2.1, TandT: 88.08 },
-                { attack: "Add Gaussian Noise", ERM: 25.8, DA: 43.3, PGDT: 79.1, TRADES: 78.4, MART: 80.4, RS: 74.2, IBP: 42.3, PRL: 45.4, TandT: 87.6 },
-                { attack: "OnePixel", ERM: 79.4, DA: 83.5, PGDT: 78.05, TRADES: 74.2, MART: 82.5, RS: 83.5, IBP: 42.5, PRL: 80.4, TandT: 89.7 },
-                { attack: "Pixle", ERM: 0, DA: 0, PGDT: 12.55, TRADES: 11.3, MART: 14.4, RS: 1, IBP: 10.3, PRL: 0, TandT: 17.5 },
-                { attack: "PGDL2", ERM: 1, DA: 0, PGDT: 35.8, TRADES: 36.1, MART: 36.1, RS: 5.2, IBP: 36.1, PRL: 0, TandT: 92.9 }
+                {Approach: "ERM", "Std Acc - CIFAR100": 81.03, "Std Acc - CIFAR10": 94.85, "Std Acc - SVHN": 94.44, "Std Acc - MNIST": 99.37},
+                {Approach: "DA", "Std Acc - CIFAR100": 78.27, "Std Acc - CIFAR10": 94.21, "Std Acc - SVHN": 94.69, "Std Acc - MNIST": 99.42},
+                {Approach: "PGDT", "Std Acc - CIFAR100": 64.35, "Std Acc - CIFAR10": 84.38, "Std Acc - SVHN": 91.19, "Std Acc - MNIST": 99.16},
+                {Approach: "TRADES", "Std Acc - CIFAR100": 62.55, "Std Acc - CIFAR10": 80.42, "Std Acc - SVHN": 86.16, "Std Acc - MNIST": 99.1},
+                {Approach: "MART", "Std Acc - CIFAR100": 63.68, "Std Acc - CIFAR10": 81.54, "Std Acc - SVHN": 90.2, "Std Acc - MNIST": 98.94},
+                {Approach: "RS", "Std Acc - CIFAR100": 56.87, "Std Acc - CIFAR10": 89.45, "Std Acc - SVHN": 88.35, "Std Acc - MNIST": 97.16},
+                {Approach: "IBP", "Std Acc - CIFAR100": 39.45, "Std Acc - CIFAR10": 48.4, "Std Acc - SVHN": 73.09, "Std Acc - MNIST": 97.78},
+                {Approach: "PRL", "Std Acc - CIFAR100": 64.89, "Std Acc - CIFAR10": 93.82, "Std Acc - SVHN": 92, "Std Acc - MNIST": 99.32},
+                {Approach: "TandT", "Std Acc - CIFAR100": 65.56, "Std Acc - CIFAR10": 94.23, "Std Acc - SVHN": 94.79, "Std Acc - MNIST": 99.32},
             ];
 
             // Define metrics for Data 1
             const metrics = {
-                "Standard": ["Std Acc - CIFAR100", "Std Acc - CIFAR10", "Std Acc - SVHN", "Std Acc - MNIST"],
-                "Robustness": ["CRR - CIFAR100", "CRR - CIFAR10", "CRR - SVHN", "CRR - MNIST"],
-                "Certified": ["CRA - CIFAR100", "CRA - CIFAR10", "CRA - SVHN", "CRA - MNIST"]
+                "Standard": ["Std Acc - CIFAR100", "Std Acc - CIFAR10", "Std Acc - SVHN", "Std Acc - MNIST"]
             };
 
             // Color scale for Data 1
-            const colorScale1 = d3.scaleSequential(d3.interpolatePlasma).domain([0, 100]);
+            const colorScale1 = d3.scaleSequential(d3.interpolatePlasma).domain([0, data1.length]);
 
             // Initialize SVG elements for Data 1
             const radarSvg = d3.select("#radarChart"),
-                  heatmapSvg = d3.select("#heatmap"),
                   tooltip = d3.select("#dashboard-tooltip");
 
             const radarWidth = +radarSvg.attr("width"),
                   radarHeight = +radarSvg.attr("height"),
                   radarRadius = Math.min(radarWidth, radarHeight) / 2 - 60;
 
-            const heatmapWidth = +heatmapSvg.attr("width"),
-                  heatmapHeight = +heatmapSvg.attr("height");
-
             // Create radar chart group for Data 1
             const radarG = radarSvg.append("g")
                 .attr("transform", `translate(${radarWidth/2},${radarHeight/2})`);
-
-            // Create heatmap group for Data 1
-            const heatmapG = heatmapSvg.append("g")
-                .attr("transform", "translate(80, 50)");
 
             // Draw radar chart function for Data 1
             function drawRadar(metric) {
@@ -1134,773 +1233,180 @@
                 // Clear existing content
                 radarG.selectAll("*").remove();
                 
-                // Add loading animation
-                const loading = radarG.append("text")
-                    .attr("x", 0)
-                    .attr("y", 0)
-                    .attr("text-anchor", "middle")
-                    .attr("dy", "0.35em")
-                    .text("Loading...")
-                    .style("font-size", "16px")
-                    .style("fill", "#6c757d");
-                
-                // Delay drawing for loading effect
-                setTimeout(() => {
-                    loading.remove();
+                // Draw grid lines
+                for (let level = 1; level <= 5; level++) {
+                    const r = radarRadius / 5 * level;
                     
-                    // Draw grid lines
-                    for (let level = 1; level <= 5; level++) {
-                        const r = radarRadius / 5 * level;
-                        
-                        // Circular grid lines
-                        radarG.append("circle")
-                            .attr("r", 0) // Initial radius is 0
-                            .style("fill", "none")
-                            .style("stroke", "#e0e0e0")
-                            .style("stroke-dasharray", "2,2")
-                            .transition()
-                            .duration(800)
-                            .delay(level * 100)
-                            .ease(d3.easeCubicOut)
-                            .attr("r", r)
-                            .style("stroke", "#CDCDCD");
-                        
-                        // Grid labels
-                        radarG.append("text")
-                            .attr("x", 0)
-                            .attr("y", -r)
-                            .attr("dy", "0.35em")
-                            .text(`${level * 20}%`)
-                            .style("font-size", "10px")
-                            .style("fill", "#999")
-                            .style("text-anchor", "middle")
-                            .style("opacity", 0)
-                            .transition()
-                            .duration(500)
-                            .delay(level * 100 + 300)
-                            .style("opacity", 1);
-                    }
+                    // Circular grid lines
+                    radarG.append("circle")
+                        .attr("r", r)
+                        .style("fill", "none")
+                        .style("stroke", "#CDCDCD")
+                        .style("stroke-dasharray", "2,2");
                     
-                    // Draw axes
-                    allAxis.forEach((axis, i) => {
-                        const angle = angleSlice * i - Math.PI / 2;
-                        
-                        // Axis line
-                        radarG.append("line")
-                            .attr("x1", 0)
-                            .attr("y1", 0)
-                            .attr("x2", 0)
-                            .attr("y2", 0)
-                            .attr("stroke", "#CDCDCD")
-                            .transition()
-                            .duration(800)
-                            .delay(i * 100 + 200)
-                            .ease(d3.easeCubicOut)
-                            .attr("x2", rScale(100) * Math.cos(angle))
-                            .attr("y2", rScale(100) * Math.sin(angle));
-                        
-                        // Axis label
-                        radarG.append("text")
-                            .attr("x", rScale(105) * Math.cos(angle))
-                            .attr("y", rScale(105) * Math.sin(angle))
-                            .text(axis.replace("Std Acc - ", "").replace("CRR - ", "").replace("CRA - ", ""))
-                            .attr("class", "axisLabel")
-                            .attr("text-anchor", "middle")
-                            .attr("dy", "0.35em")
-                            .style("opacity", 0)
-                            .transition()
-                            .duration(500)
-                            .delay(i * 100 + 400)
-                            .style("opacity", 1);
-                    });
-                    
-                    // Draw data paths
-                    const paths = radarG.selectAll(".lineGroup")
-                        .data(data1)
-                        .enter()
-                        .append("g")
-                        .attr("class", "lineGroup");
-                    
-                    // Path animation
-                    paths.append("path")
-                        .attr("d", d => {
-                            const lineGenerator = d3.lineRadial()
-                                .radius(a => 0) // Initial radius is 0
-                                .angle((a, i) => i * angleSlice)
-                                .curve(d3.curveCardinalClosed);
-                            return lineGenerator(allAxis);
-                        })
-                        .attr("stroke", (d, i) => colorScale1(i * 10))
-                        .attr("class", "line")
-                        .style("opacity", 0.8)
-                        .transition()
-                        .duration(1200)
-                        .delay((d, i) => i * 100 + 500)
-                        .ease(d3.easeCubicOut)
-                        .attrTween("d", function(d) {
-                            const interpolate = d3.interpolate(0, 1);
-                            return function(t) {
-                                const lineGenerator = d3.lineRadial()
-                                    .radius(a => rScale(d[a]) * interpolate(t))
-                                    .angle((a, i) => i * angleSlice)
-                                    .curve(d3.curveCardinalClosed);
-                                return lineGenerator(allAxis);
-                            };
-                        })
-                        .on("mouseover", function(event, d) {
-                            d3.selectAll(".line").classed("faded", true);
-                            d3.select(this).classed("faded", false).classed("highlight", true);
-                            
-                            // Add pulse animation
-                            d3.select(this)
-                                .transition()
-                                .duration(500)
-                                .ease(d3.easeElasticOut)
-                                .attr("stroke-width", 4);
-                        })
-                        .on("mouseout", function() {
-                            d3.selectAll(".line").classed("faded", false).classed("highlight", false);
-                            
-                            // Restore original width
-                            d3.select(this)
-                                .transition()
-                                .duration(300)
-                                .attr("stroke-width", 2);
-                        });
-                    
-                    // Data point animation
-                    paths.selectAll(".dot")
-                        .data(d => allAxis.map(a => ({axis: a, value: d[a], Approach: d.Approach})))
-                        .enter()
-                        .append("circle")
-                        .attr("cx", d => 0)
-                        .attr("cy", d => 0)
-                        .attr("r", 0)
-                        .attr("fill", d => colorScale1(data1.findIndex(e => e.Approach === d.Approach) * 10))
-                        .attr("class", "dot")
-                        .transition()
-                        .duration(800)
-                        .delay((d, i) => i * 50 + 800)
-                        .ease(d3.easeElasticOut)
-                        .attr("cx", d => rScale(d.value) * Math.cos(allAxis.indexOf(d.axis) * angleSlice - Math.PI / 2))
-                        .attr("cy", d => rScale(d.value) * Math.sin(allAxis.indexOf(d.axis) * angleSlice - Math.PI / 2))
-                        .attr("r", 5)
-                        .on("mouseover", function(event, d) {
-                            d3.select(this)
-                                .transition()
-                                .duration(200)
-                                .attr("r", 8)
-                                .style("fill-opacity", 1);
-                            
-                            tooltip.transition()
-                                .duration(200)
-                                .style("opacity", 1)
-                                .style("transform", "translateY(0)");
-                            tooltip.html(`<h3>${d.Approach}</h3><p>${d.axis}: ${d.value}%</p>`)
-                                .style("left", (event.pageX + 10) + "px")
-                                .style("top", (event.pageY - 20) + "px");
-                        })
-                        .on("mousemove", function(event, d) {
-                            tooltip.style("left", (event.pageX + 10) + "px")
-                                .style("top", (event.pageY - 20) + "px");
-                        })
-                        .on("mouseout", function() {
-                            d3.select(this)
-                                .transition()
-                                .duration(300)
-                                .attr("r", 5)
-                                .style("fill-opacity", 0.8);
-                            
-                            tooltip.transition()
-                                .duration(200)
-                                .style("opacity", 0)
-                                .style("transform", "translateY(10px)");
-                        });
-                    
-                    // Update legend
-                    updateRadarLegend();
-                }, 300);
-            }
-
-            // Draw heatmap function for Data 1
-            function drawHeatmap(metric) {
-                const allAxis = metrics[metric];
-                
-                // Clear existing content
-                heatmapG.selectAll("*").remove();
-                
-                // Add loading animation
-                const loading = heatmapG.append("text")
-                    .attr("x", heatmapWidth / 2 - 80)
-                    .attr("y", heatmapHeight / 2)
-                    .attr("text-anchor", "middle")
-                    .attr("dy", "0.35em")
-                    .text("Loading...")
-                    .style("font-size", "16px")
-                    .style("fill", "#6c757d");
-                
-                // Delay drawing for loading effect
-                setTimeout(() => {
-                    loading.remove();
-                    
-                    // Calculate heatmap dimensions
-                    const cellWidth = (heatmapWidth - 100) / allAxis.length;
-                    const cellHeight = (heatmapHeight - 100) / data1.length;
-                    
-                    // Add X-axis labels
-                    allAxis.forEach((axis, i) => {
-                        heatmapG.append("text")
-                            .attr("x", i * cellWidth + cellWidth / 2)
-                            .attr("y", -10)
-                            .attr("text-anchor", "middle")
-                            .text(axis.replace("Std Acc - ", "").replace("CRR - ", "").replace("CRA - ", ""))
-                            .style("font-size", "12px")
-                            .style("fill", "#555")
-                            .style("opacity", 0)
-                            .transition()
-                            .duration(500)
-                            .delay(i * 100)
-                            .style("opacity", 1);
-                    });
-                    
-                    // Add Y-axis labels
-                    data1.forEach((d, i) => {
-                        heatmapG.append("text")
-                            .attr("x", -10)
-                            .attr("y", i * cellHeight + cellHeight / 2)
-                            .attr("text-anchor", "end")
-                            .attr("dy", "0.35em")
-                            .text(d.Approach)
-                            .style("font-size", "12px")
-                            .style("fill", "#555")
-                            .style("opacity", 0)
-                            .transition()
-                            .duration(500)
-                            .delay(i * 100)
-                            .style("opacity", 1);
-                    });
-                    
-                    // Draw heatmap cells
-                    const cells = heatmapG.selectAll(".heatmap-cell")
-                        .data(data1.flatMap((d, i) => 
-                            allAxis.map(axis => ({
-                                Approach: d.Approach,
-                                axis: axis,
-                                value: d[axis],
-                                x: allAxis.indexOf(axis),
-                                y: i
-                            }))
-                        ))
-                        .enter()
-                        .append("rect")
-                        .attr("class", "heatmap-cell")
-                        .attr("x", d => d.x * cellWidth)
-                        .attr("y", d => d.y * cellHeight)
-                        .attr("width", cellWidth)
-                        .attr("height", cellHeight)
-                        .attr("fill", "#f0f0f0") // Initial color
-                        .style("opacity", 0)
-                        .on("mouseover", function(event, d) {
-                            d3.select(this)
-                                .transition()
-                                .duration(200)
-                                .attr("stroke", "#333")
-                                .attr("stroke-width", 2);
-                            
-                            tooltip.transition()
-                                .duration(200)
-                                .style("opacity", 1)
-                                .style("transform", "translateY(0)");
-                            tooltip.html(`<h3>${d.Approach}</h3><p>${d.axis}: ${d.value}%</p>`)
-                                .style("left", (event.pageX + 10) + "px")
-                                .style("top", (event.pageY - 20) + "px");
-                        })
-                        .on("mousemove", function(event, d) {
-                            tooltip.style("left", (event.pageX + 10) + "px")
-                                .style("top", (event.pageY - 20) + "px");
-                        })
-                        .on("mouseout", function() {
-                            d3.select(this)
-                                .transition()
-                                .duration(300)
-                                .attr("stroke", "none");
-                            
-                            tooltip.transition()
-                                .duration(200)
-                                .style("opacity", 0)
-                                .style("transform", "translateY(10px)");
-                        });
-                    
-                    // Cell color animation
-                    cells.transition()
-                        .duration(800)
-                        .delay((d, i) => i * 30)
-                        .ease(d3.easeCubicOut)
-                        .style("opacity", 1)
-                        .attr("fill", d => colorScale1(d.value));
-                    
-                    // Add value labels
-                    heatmapG.selectAll(".cell-value")
-                        .data(data1.flatMap((d, i) => 
-                            allAxis.map(axis => ({
-                                Approach: d.Approach,
-                                axis: axis,
-                                value: d[axis],
-                                x: allAxis.indexOf(axis),
-                                y: i
-                            }))
-                        ))
-                        .enter()
-                        .append("text")
-                        .attr("class", "cell-value")
-                        .attr("x", d => d.x * cellWidth + cellWidth / 2)
-                        .attr("y", d => d.y * cellHeight + cellHeight / 2)
-                        .attr("text-anchor", "middle")
+                    // Grid labels
+                    radarG.append("text")
+                        .attr("x", 0)
+                        .attr("y", -r)
                         .attr("dy", "0.35em")
-                        .text(d => d.value + "%")
+                        .text(`${level * 20}%`)
                         .style("font-size", "10px")
-                        .style("fill", d => d.value > 50 ? "white" : "black")
-                        .style("font-weight", "bold")
-                        .style("opacity", 0)
-                        .transition()
-                        .duration(500)
-                        .delay((d, i) => i * 30 + 400)
-                        .style("opacity", 1);
-                    
-                    // Update heatmap legend
-                    updateHeatmapLegend();
-                }, 300);
-            }
-
-            // Update radar chart legend for Data 1
-            function updateRadarLegend() {
-                const legend = d3.select("#radarLegend");
-                legend.selectAll("*").remove();
+                        .style("fill", "#999")
+                        .style("text-anchor", "middle");
+                }
                 
-                const legendItems = legend.selectAll(".dashboard-legend-item")
+                // Draw axes
+                allAxis.forEach((axis, i) => {
+                    const angle = angleSlice * i - Math.PI / 2;
+                    
+                    // Axis line
+                    radarG.append("line")
+                        .attr("x1", 0)
+                        .attr("y1", 0)
+                        .attr("x2", rScale(100) * Math.cos(angle))
+                        .attr("y2", rScale(100) * Math.sin(angle))
+                        .attr("stroke", "#CDCDCD");
+                    
+                    // Axis label
+                    radarG.append("text")
+                        .attr("x", rScale(105) * Math.cos(angle))
+                        .attr("y", rScale(105) * Math.sin(angle))
+                        .text(axis.replace("Std Acc - ", ""))
+                        .attr("class", "axisLabel")
+                        .attr("text-anchor", "middle")
+                        .attr("dy", "0.35em");
+                });
+                
+                // Draw data paths
+                const paths = radarG.selectAll(".lineGroup")
                     .data(data1)
                     .enter()
-                    .append("div")
-                    .attr("class", "dashboard-legend-item")
-                    .on("click", function(event, d) {
-                        const isActive = d3.select(this).classed("active");
-                        d3.selectAll(".dashboard-legend-item").classed("active", false);
+                    .append("g")
+                    .attr("class", "lineGroup");
+                
+                // Path animation
+                paths.append("path")
+                    .attr("d", d => {
+                        const lineGenerator = d3.lineRadial()
+                            .radius(a => rScale(d[a]))
+                            .angle((a, i) => i * angleSlice)
+                            .curve(d3.curveCardinalClosed);
+                        return lineGenerator(allAxis);
+                    })
+                    .attr("stroke", (d, i) => colorScale1(i))
+                    .attr("class", "line")
+                    .style("opacity", 0.8)
+                    .on("mouseover", function(event, d) {
+                        d3.selectAll(".line").classed("faded", true);
+                        d3.select(this).classed("faded", false).classed("highlight", true);
                         
-                        if (!isActive) {
-                            d3.select(this).classed("active", true);
-                            // Highlight selected approach
-                            const index = data1.findIndex(item => item.Approach === d.Approach);
-                            d3.selectAll(".line").classed("faded", true);
-                            d3.selectAll(".lineGroup").filter((item, i) => i === index)
-                                .select(".line").classed("faded", false).classed("highlight", true);
-                        } else {
-                            // Restore all
-                            d3.selectAll(".line").classed("faded", false).classed("highlight", false);
-                        }
+                        // Add pulse animation
+                        d3.select(this)
+                            .transition()
+                            .duration(500)
+                            .ease(d3.easeElasticOut)
+                            .attr("stroke-width", 4);
+                    })
+                    .on("mouseout", function() {
+                        d3.selectAll(".line").classed("faded", false).classed("highlight", false);
+                        
+                        // Restore original width
+                        d3.select(this)
+                            .transition()
+                            .duration(300)
+                            .attr("stroke-width", 2);
                     });
+                
+                // Data point animation
+                paths.selectAll(".dot")
+                    .data(d => allAxis.map(a => ({axis: a, value: d[a], Approach: d.Approach})))
+                    .enter()
+                    .append("circle")
+                    .attr("cx", d => rScale(d.value) * Math.cos(allAxis.indexOf(d.axis) * angleSlice - Math.PI / 2))
+                    .attr("cy", d => rScale(d.value) * Math.sin(allAxis.indexOf(d.axis) * angleSlice - Math.PI / 2))
+                    .attr("r", 5)
+                    .attr("fill", d => colorScale1(data1.findIndex(e => e.Approach === d.Approach)))
+                    .attr("class", "dot")
+                    .on("mouseover", function(event, d) {
+                        d3.select(this)
+                            .transition()
+                            .duration(200)
+                            .attr("r", 8)
+                            .style("fill-opacity", 1);
+                        
+                        tooltip.transition()
+                            .duration(200)
+                            .style("opacity", 1)
+                            .style("transform", "translateY(0)");
+                        tooltip.html(`<h3>${d.Approach}</h3><p>${d.axis}: ${d.value}%</p>`)
+                            .style("left", (event.pageX + 10) + "px")
+                            .style("top", (event.pageY - 20) + "px");
+                    })
+                    .on("mousemove", function(event, d) {
+                        tooltip.style("left", (event.pageX + 10) + "px")
+                            .style("top", (event.pageY - 20) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this)
+                            .transition()
+                            .duration(300)
+                            .attr("r", 5)
+                            .style("fill-opacity", 0.8);
+                        
+                        tooltip.transition()
+                            .duration(200)
+                            .style("opacity", 0)
+                            .style("transform", "translateY(10px)");
+                    });
+                
+                // Add legend
+                const legend = radarG.append("g")
+                    .attr("transform", `translate(${-radarWidth/2 + 20}, ${-radarHeight/2 + 20})`);
+                
+                data1.forEach((d, i) => {
+                    const legendItem = legend.append("g")
+                        .attr("transform", `translate(0, ${i * 25})`)
+                        .style("cursor", "pointer")
+                        .on("click", function() {
+                            const isActive = d3.select(this).classed("active");
+                            d3.selectAll(".legend-item").classed("active", false);
+                            
+                            if (!isActive) {
+                                d3.select(this).classed("active", true);
+                                // Highlight selected approach
+                                const index = data1.findIndex(item => item.Approach === d.Approach);
+                                d3.selectAll(".line").classed("faded", true);
+                                d3.selectAll(".lineGroup").filter((item, i) => i === index)
+                                    .select(".line").classed("faded", false).classed("highlight", true);
+                            } else {
+                                // Restore all
+                                d3.selectAll(".line").classed("faded", false).classed("highlight", false);
+                            }
+                        });
                     
-                legendItems.append("div")
-                    .attr("class", "dashboard-legend-color")
-                    .style("background-color", (d, i) => colorScale1(i * 10));
+                    legendItem.append("rect")
+                        .attr("width", 15)
+                        .attr("height", 15)
+                        .attr("fill", colorScale1(i))
+                        .attr("class", "legend-color");
                     
-                legendItems.append("span")
-                    .text(d => d.Approach);
-            }
-
-            // Update heatmap legend for Data 1
-            function updateHeatmapLegend() {
-                const legend = d3.select("#heatmapLegend");
-                legend.selectAll("*").remove();
-                
-                // Create color legend
-                const legendWidth = 300;
-                const legendHeight = 20;
-                
-                const legendSvg = legend.append("svg")
-                    .attr("width", legendWidth)
-                    .attr("height", legendHeight + 30);
-                
-                const defs = legendSvg.append("defs");
-                const gradient = defs.append("linearGradient")
-                    .attr("id", "heatmap-gradient")
-                    .attr("x1", "0%")
-                    .attr("y1", "0%")
-                    .attr("x2", "100%")
-                    .attr("y2", "0%");
-                
-                gradient.selectAll("stop")
-                    .data(d3.range(0, 1.01, 0.1))
-                    .enter().append("stop")
-                    .attr("offset", d => `${d * 100}%`)
-                    .attr("stop-color", d => colorScale1(d * 100));
-                
-                legendSvg.append("rect")
-                    .attr("x", 0)
-                    .attr("y", 0)
-                    .attr("width", legendWidth)
-                    .attr("height", legendHeight)
-                    .style("fill", "url(#heatmap-gradient)")
-                    .style("opacity", 0)
-                    .transition()
-                    .duration(800)
-                    .style("opacity", 1);
-                
-                // Add legend labels
-                const legendScale = d3.scaleLinear()
-                    .domain([0, 100])
-                    .range([0, legendWidth]);
-                
-                const legendAxis = d3.axisBottom(legendScale)
-                    .ticks(5)
-                    .tickFormat(d => d + "%");
-                
-                legendSvg.append("g")
-                    .attr("transform", `translate(0, ${legendHeight})`)
-                    .call(legendAxis)
-                    .style("opacity", 0)
-                    .transition()
-                    .duration(800)
-                    .delay(500)
-                    .style("opacity", 1);
+                    legendItem.append("text")
+                        .attr("x", 20)
+                        .attr("y", 12)
+                        .text(d.Approach)
+                        .style("font-size", "12px")
+                        .attr("class", "legend-item");
+                });
             }
 
             // ------------------ Initialization for Data 1 ------------------
             drawRadar("Standard");
-            drawHeatmap("Standard");
 
             // Metric dropdown for Data 1
             d3.select("#metricSelect").on("change", function(){
                 const metric = this.value;
-                
-                // Add transition animation
-                d3.selectAll(".chart")
-                    .transition()
-                    .duration(300)
-                    .style("opacity", 0.5)
-                    .on("end", function() {
-                        drawRadar(metric);
-                        drawHeatmap(metric);
-                        
-                        d3.selectAll(".chart")
-                            .transition()
-                            .duration(300)
-                            .style("opacity", 1);
-                    });
+                drawRadar(metric);
             });
-
-            // Model dropdown for Data 1
-            const modelSelect = d3.select("#modelFilter");
-            data1.forEach(d => modelSelect.append("option").text(d.Approach).attr("value", d.Approach));
-
-            modelSelect.on("change", function(){
-                const selected = this.value;
-                
-                radarG.selectAll(".lineGroup")
-                    .transition()
-                    .duration(500)
-                    .style("opacity", d => (selected === "All" || d.Approach === selected) ? 1 : 0.1);
-            });
-
-            // ------------------ Data 2: Adversarial Robustness Heatmap ------------------
-            
-            // Set dimensions and margins for Data 2
-            const margin = { top: 80, right: 150, bottom: 100, left: 150 };
-            const width = 1000 - margin.left - margin.right;
-            const height = 800 - margin.top - margin.bottom;
-
-            // Create SVG for Data 2
-            const robustnessSvg = d3.select("#robustnessHeatmap")
-                .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", `translate(${margin.left},${margin.top})`);
-
-            // Extract defense model names (all columns except "attack")
-            const defenseModels = Object.keys(data2[0]).filter(key => key !== "attack");
-            const attackMethods = data2.map(d => d.attack);
-
-            // Create scales for Data 2
-            const xScale = d3.scaleBand()
-                .domain(defenseModels)
-                .range([0, width])
-                .padding(0.05);
-
-            const yScale = d3.scaleBand()
-                .domain(attackMethods)
-                .range([0, height])
-                .padding(0.05);
-
-            const colorScale2 = d3.scaleSequential(d3.interpolateRdYlGn)
-                .domain([0, 100]);
-
-            // Add X axis with transition for Data 2
-            robustnessSvg.append("g")
-                .attr("transform", `translate(0,${height})`)
-                .call(d3.axisBottom(xScale))
-                .selectAll("text")
-                .attr("transform", "rotate(-45)")
-                .style("text-anchor", "end")
-                .attr("dx", "-.8em")
-                .attr("dy", ".15em")
-                .style("opacity", 0)
-                .transition()
-                .duration(800)
-                .style("opacity", 1);
-
-            // Add Y axis with transition for Data 2
-            robustnessSvg.append("g")
-                .call(d3.axisLeft(yScale))
-                .selectAll("text")
-                .style("text-anchor", "end")
-                .attr("dx", "-.8em")
-                .attr("dy", ".15em")
-                .style("opacity", 0)
-                .transition()
-                .duration(800)
-                .delay(100)
-                .style("opacity", 1);
-
-            // Add X axis label for Data 2
-            robustnessSvg.append("text")
-                .attr("class", "axis-label")
-                .attr("text-anchor", "middle")
-                .attr("x", width / 2)
-                .attr("y", height + 50)
-                .text("Defense Models")
-                .style("opacity", 0)
-                .transition()
-                .duration(800)
-                .delay(400)
-                .style("opacity", 1);
-
-            // Add Y axis label for Data 2
-            robustnessSvg.append("text")
-                .attr("class", "axis-label")
-                .attr("text-anchor", "middle")
-                .attr("transform", "rotate(-90)")
-                .attr("x", -height / 2)
-                .attr("y", -100)
-                .text("Attack Methods")
-                .style("opacity", 0)
-                .transition()
-                .duration(800)
-                .delay(400)
-                .style("opacity", 1);
-
-            // Create heatmap cells with transitions for Data 2
-            const cells = robustnessSvg.selectAll()
-                .data(data2)
-                .enter()
-                .each(function(d) {
-                    const attack = d.attack;
-                    defenseModels.forEach(model => {
-                        const value = d[model];
-                        
-                        // Create rectangle with initial state
-                        const rect = robustnessSvg.append("rect")
-                            .attr("x", xScale(model))
-                            .attr("y", yScale(attack))
-                            .attr("width", xScale.bandwidth())
-                            .attr("height", yScale.bandwidth())
-                            .attr("fill", colorScale2(value))
-                            .style("stroke", "#fff")
-                            .style("stroke-width", 1)
-                            .style("opacity", 0)
-                            .attr("class", "cell")
-                            .on("mouseover", function(event) {
-                                tooltip
-                                    .style("opacity", 1)
-                                    .html(`<strong>${attack} vs ${model}</strong><br>Accuracy: ${value}%`)
-                                    .style("left", (event.pageX + 10) + "px")
-                                    .style("top", (event.pageY - 28) + "px");
-                                
-                                d3.select(this)
-                                    .transition()
-                                    .duration(200)
-                                    .style("stroke", "#333")
-                                    .style("stroke-width", 2);
-                            })
-                            .on("mouseout", function() {
-                                tooltip.style("opacity", 0);
-                                d3.select(this)
-                                    .transition()
-                                    .duration(200)
-                                    .style("stroke", "#fff")
-                                    .style("stroke-width", 1);
-                            });
-                        
-                        // Animate rectangles
-                        rect.transition()
-                            .duration(600)
-                            .delay((yScale(attack) / height) * 1000) // Stagger based on position
-                            .style("opacity", 1);
-                        
-                        // Add text label with initial state
-                        const text = robustnessSvg.append("text")
-                            .attr("x", xScale(model) + xScale.bandwidth() / 2)
-                            .attr("y", yScale(attack) + yScale.bandwidth() / 2)
-                            .attr("text-anchor", "middle")
-                            .attr("dy", "0.35em")
-                            .attr("font-size", "10px")
-                            .attr("font-weight", value < 50 ? "bold" : "normal")
-                            .attr("fill", value < 50 ? "white" : "black")
-                            .text(value)
-                            .style("opacity", 0);
-                        
-                        // Animate text
-                        text.transition()
-                            .duration(400)
-                            .delay((yScale(attack) / height) * 1000 + 300) // Slightly after rectangles
-                            .style("opacity", 1);
-                    });
-                });
-
-            // Add title with transition for Data 2
-            robustnessSvg.append("text")
-                .attr("x", width / 2)
-                .attr("y", -40)
-                .attr("text-anchor", "middle")
-                .style("font-size", "20px")
-                .style("font-weight", "bold")
-                .text("Adversarial Robustness Heatmap")
-                .style("opacity", 0)
-                .transition()
-                .duration(1000)
-                .style("opacity", 1);
-
-            // Create legend for Data 2
-            const legendWidth = 300;
-            const legendHeight = 20;
-            
-            const legendSvg = d3.select("#robustnessLegend")
-                .append("svg")
-                .attr("width", legendWidth)
-                .attr("height", 50);
-            
-            const legendScale = d3.scaleLinear()
-                .domain([0, 100])
-                .range([0, legendWidth]);
-            
-            const legendAxis = d3.axisBottom(legendScale)
-                .ticks(5);
-            
-            const defs = legendSvg.append("defs");
-            
-            const linearGradient = defs.append("linearGradient")
-                .attr("id", "linear-gradient")
-                .attr("x1", "0%")
-                .attr("y1", "0%")
-                .attr("x2", "100%")
-                .attr("y2", "0%");
-            
-            // Add gradient stops
-            const stops = [0, 0.2, 0.4, 0.6, 0.8, 1];
-            stops.forEach((stop, i) => {
-                linearGradient.append("stop")
-                    .attr("offset", `${stop * 100}%`)
-                    .attr("stop-color", d3.interpolateRdYlGn(stop));
-            });
-            
-            // Add gradient rectangle with transition
-            legendSvg.append("rect")
-                .attr("x", 0)
-                .attr("y", 0)
-                .attr("width", legendWidth)
-                .attr("height", legendHeight)
-                .style("fill", "url(#linear-gradient)")
-                .style("opacity", 0)
-                .transition()
-                .duration(800)
-                .delay(800)
-                .style("opacity", 1);
-            
-            // Add legend axis with transition
-            legendSvg.append("g")
-                .attr("transform", `translate(0,${legendHeight})`)
-                .call(legendAxis)
-                .style("opacity", 0)
-                .transition()
-                .duration(800)
-                .delay(1000)
-                .style("opacity", 1);
-            
-            // Add legend label with transition
-            legendSvg.append("text")
-                .attr("x", legendWidth / 2)
-                .attr("y", legendHeight + 30)
-                .attr("text-anchor", "middle")
-                .text("Accuracy (%)")
-                .style("opacity", 0)
-                .transition()
-                .duration(800)
-                .delay(1200)
-                .style("opacity", 1);
-        }
-
-        // Note: The remaining visualization functions would be included here in a full implementation
-        // For brevity, I've only included the first two as examples
-        function initParallelogram() {
-            // Implementation for parallelogram visualization
-            const container = document.getElementById('parallelogram-container');
-            container.innerHTML = '<div class="loading">Loading Parallelogram Visualization...</div>';
-        }
-
-        function initVenn() {
-            // Implementation for venn diagram visualization
-            const container = document.getElementById('venn-container');
-            container.innerHTML = '<div class="loading">Loading Venn Diagram...</div>';
-        }
-
-        // Add other visualization initialization functions here...
-        function initGridPath() {
-            const container = document.getElementById('grid-path-container');
-            container.innerHTML = '<div class="loading">Loading Grid Path Visualization...</div>';
-        }
-
-        function initAccuracy() {
-            const container = document.getElementById('accuracy-container');
-            container.innerHTML = '<div class="loading">Loading Accuracy Visualization...</div>';
-        }
-
-        function initMap() {
-            const container = document.getElementById('map-container');
-            container.innerHTML = '<div class="loading">Loading Map Visualization...</div>';
-        }
-
-        function initMathPlots() {
-            const container = document.getElementById('math-plots-container');
-            container.innerHTML = '<div class="loading">Loading Math Plots...</div>';
-        }
-
-        function initNetwork() {
-            const container = document.getElementById('network-container');
-            container.innerHTML = '<div class="loading">Loading Network Visualization...</div>';
-        }
-
-        function initFrequency() {
-            const container = document.getElementById('frequency-container');
-            container.innerHTML = '<div class="loading">Loading Frequency Visualization...</div>';
-        }
-
-        function initTransformer() {
-            const container = document.getElementById('transformer-container');
-            container.innerHTML = '<div class="loading">Loading Transformer Visualization...</div>';
-        }
-
-        function initStickFigure() {
-            const container = document.getElementById('stick-figure-container');
-            container.innerHTML = '<div class="loading">Loading Stick Figure...</div>';
-        }
-
-        function initProbability() {
-            const container = document.getElementById('probability-container');
-            container.innerHTML = '<div class="loading">Loading Probability Visualization...</div>';
-        }
-
-        function initSquareOverlap() {
-            const container = document.getElementById('square-overlap-container');
-            container.innerHTML = '<div class="loading">Loading Square Overlap Visualization...</div>';
         }
     </script>
 </body>
