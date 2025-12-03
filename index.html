@@ -37,12 +37,15 @@
         h1 {
             color: #2c3e50;
             margin-bottom: 10px;
+            font-size: 2.5rem;
         }
         
         .description {
             color: #7f8c8d;
             max-width: 800px;
             margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
         
         /* Tab navigation */
@@ -64,6 +67,7 @@
             transition: all 0.3s;
             font-weight: bold;
             color: #7f8c8d;
+            font-size: 1.1rem;
         }
         
         .tab.active {
@@ -109,15 +113,24 @@
             background: #3498db;
             color: white;
             font-weight: bold;
+            font-size: 1.2rem;
         }
         
         .card-content {
             padding: 20px;
-            height: 500px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+        
+        .card-content svg {
+            width: 100%;
+            height: 100%;
+            max-width: 500px;
+            max-height: 350px;
         }
         
         /* PSI table styles */
@@ -129,41 +142,69 @@
             margin-bottom: 30px;
         }
         
+        .psi-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .psi-section h3 {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
         #PSItable, .psi-table th, .psi-table td {
-            border: 1px solid black;
+            border: 1px solid #ddd;
             border-collapse: collapse;
-            padding: 8px;
+            padding: 12px;
             text-align: center;
             width: 100%;
         }
         
         .psi-table th {
-            background-color: #f2f2f2;
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
         }
         
         .psi-table td {
             background-color: #fafafa;
         }
         
-        /* SVG effects table styles */
+        .psi-table tr:nth-child(even) td {
+            background-color: #f0f7ff;
+        }
+        
+        /* SVG effects table styles - 优化表格显示 */
         .svg-section {
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             padding: 20px;
+            overflow-x: auto;
+        }
+        
+        .svg-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
         }
         
         .svg-table {
             border-collapse: collapse;
             width: 100%;
             margin-top: 20px;
+            min-width: 800px;
+            font-size: 0.9rem;
         }
         
         .svg-table td {
-            border: 1px solid #333;
-            padding: 10px;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
             text-align: center;
             vertical-align: middle;
+            min-width: 120px;
         }
         
         /* Effect classes */
@@ -184,19 +225,74 @@
         }
         
         .svg-table td svg {
-            width: 100px;
-            height: auto;
+            width: 80px;
+            height: 80px;
+            display: block;
+            margin: 0 auto;
         }
         
         .svg-table img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* 添加行标题样式 */
+        .row-title {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            text-align: center;
+            color: #2c3e50;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        /* 添加列标题样式 */
+        .col-title {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        /* 第一列添加行标识 */
+        .svg-table tr td:first-child {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .svg-table tr td:first-child .row-title {
+            background: none;
+            padding: 0;
+            margin: 5px 0 0 0;
         }
         
         /* Model Performance Dashboard Styles */
         .dashboard {
             max-width: 1400px;
             margin: 0 auto;
+        }
+        
+        .dashboard h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.2rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
         }
         
         .dashboard-container {
@@ -290,6 +386,7 @@
         .radar-container, .heatmap-container {
             display: flex;
             justify-content: center;
+            width: 100%;
         }
         
         .axisLabel {
@@ -468,6 +565,78 @@
             line-height: 1.5;
         }
         
+        /* 对抗鲁棒性热力图容器 */
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .robustness-heatmap {
+            width: 100%;
+            overflow: auto;
+        }
+        
+        .robustness-legend {
+            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        
+        /* 添加SVG图像悬停效果 */
+        .svg-table td:hover {
+            background-color: #f0f7ff;
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* 调整图表大小以适应容器 */
+        .model-chart {
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .model-chart svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* 添加SVG效果描述 */
+        .svg-description {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .svg-description h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .svg-description ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .svg-description li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
         @media (max-width: 768px) {
             .visualization-grid {
                 grid-template-columns: 1fr;
@@ -475,7 +644,7 @@
             
             .card-content {
                 height: auto;
-                min-height: 400px;
+                min-height: 300px;
             }
             
             .tabs {
@@ -488,6 +657,50 @@
             
             .chart {
                 width: 100%;
+            }
+            
+            .svg-section {
+                overflow-x: auto;
+            }
+            
+            .svg-table {
+                min-width: 800px;
+            }
+            
+            .dashboard-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .card-header {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .description {
+                font-size: 1rem;
+            }
+            
+            .tab {
+                padding: 12px 15px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -513,21 +726,21 @@
                 <div class="visualization-card">
                     <div class="card-header">Parallelogram Mirror View</div>
                     <div class="card-content" id="parallelogram-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <rect x="50" y="50" width="200" height="150" fill="rgba(74, 144, 226, 0.3)" stroke="#3366cc" stroke-width="2" />
                             <rect x="150" y="150" width="200" height="150" fill="rgba(74, 144, 226, 0.3)" stroke="#3366cc" stroke-width="2" transform="scale(-1, 1) translate(-500, 0)" />
                             <line x1="50" y1="50" x2="150" y2="150" stroke="#ff6600" stroke-width="2" stroke-dasharray="5,5" />
                             <line x1="250" y1="50" x2="350" y2="150" stroke="#ff6600" stroke-width="2" stroke-dasharray="5,5" />
                             <line x1="50" y1="200" x2="150" y2="300" stroke="#ff6600" stroke-width="2" stroke-dasharray="5,5" />
                             <line x1="250" y1="200" x2="350" y2="300" stroke="#ff6600" stroke-width="2" stroke-dasharray="5,5" />
-                            <text x="50" y="40" class="point-label">A</text>
-                            <text x="250" y="40" class="point-label">B</text>
-                            <text x="50" y="220" class="point-label">C</text>
-                            <text x="250" y="220" class="point-label">D</text>
-                            <text x="350" y="40" class="point-label">A'</text>
-                            <text x="150" y="40" class="point-label">B'</text>
-                            <text x="350" y="220" class="point-label">C'</text>
-                            <text x="150" y="220" class="point-label">D'</text>
+                            <text x="50" y="40" class="point-label" font-size="12" fill="#333">A</text>
+                            <text x="250" y="40" class="point-label" font-size="12" fill="#333">B</text>
+                            <text x="50" y="220" class="point-label" font-size="12" fill="#333">C</text>
+                            <text x="250" y="220" class="point-label" font-size="12" fill="#333">D</text>
+                            <text x="350" y="40" class="point-label" font-size="12" fill="#333">A'</text>
+                            <text x="150" y="40" class="point-label" font-size="12" fill="#333">B'</text>
+                            <text x="350" y="220" class="point-label" font-size="12" fill="#333">C'</text>
+                            <text x="150" y="220" class="point-label" font-size="12" fill="#333">D'</text>
                         </svg>
                     </div>
                 </div>
@@ -536,14 +749,14 @@
                 <div class="visualization-card">
                     <div class="card-header">Venn Diagram</div>
                     <div class="card-content" id="venn-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <circle cx="200" cy="200" r="120" fill="rgba(255, 0, 0, 0.5)" stroke="#333" stroke-width="2" class="venn-circle" />
                             <circle cx="300" cy="200" r="120" fill="rgba(0, 255, 0, 0.5)" stroke="#333" stroke-width="2" class="venn-circle" />
                             <circle cx="250" cy="280" r="120" fill="rgba(0, 0, 255, 0.5)" stroke="#333" stroke-width="2" class="venn-circle" />
-                            <text x="180" y="180" text-anchor="middle" font-size="16" font-weight="bold">Set A</text>
-                            <text x="320" y="180" text-anchor="middle" font-size="16" font-weight="bold">Set B</text>
-                            <text x="250" y="320" text-anchor="middle" font-size="16" font-weight="bold">Set C</text>
-                            <text x="250" y="220" text-anchor="middle" font-size="14" font-weight="bold">A∩B∩C</text>
+                            <text x="180" y="180" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Set A</text>
+                            <text x="320" y="180" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Set B</text>
+                            <text x="250" y="320" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Set C</text>
+                            <text x="250" y="220" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">A∩B∩C</text>
                         </svg>
                     </div>
                 </div>
@@ -552,7 +765,7 @@
                 <div class="visualization-card">
                     <div class="card-header">Grid Background with Arrow Path</div>
                     <div class="card-content" id="grid-path-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <defs>
                                 <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
                                     <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#e0e0e0" stroke-width="1"/>
@@ -566,8 +779,8 @@
                                   stroke="#3498db" stroke-width="3" fill="none" marker-end="url(#arrowhead)" />
                             <circle cx="50" cy="100" r="5" fill="#e74c3c" />
                             <circle cx="450" cy="300" r="5" fill="#e74c3c" />
-                            <text x="50" y="90" text-anchor="middle" font-size="12">Start</text>
-                            <text x="450" y="290" text-anchor="middle" font-size="12">End</text>
+                            <text x="50" y="90" text-anchor="middle" font-size="12" fill="#333">Start</text>
+                            <text x="450" y="290" text-anchor="middle" font-size="12" fill="#333">End</text>
                         </svg>
                     </div>
                 </div>
@@ -576,22 +789,22 @@
                 <div class="visualization-card">
                     <div class="card-header">Cross Validation Accuracy</div>
                     <div class="card-content" id="accuracy-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <!-- X-axis -->
                             <line x1="50" y1="350" x2="450" y2="350" stroke="#333" stroke-width="2" />
                             <!-- Y-axis -->
                             <line x1="50" y1="50" x2="50" y2="350" stroke="#333" stroke-width="2" />
                             
                             <!-- Y-axis labels -->
-                            <text x="30" y="50" text-anchor="middle" font-size="12">100%</text>
-                            <text x="30" y="150" text-anchor="middle" font-size="12">75%</text>
-                            <text x="30" y="250" text-anchor="middle" font-size="12">50%</text>
-                            <text x="30" y="350" text-anchor="middle" font-size="12">25%</text>
+                            <text x="30" y="50" text-anchor="middle" font-size="12" fill="#333">100%</text>
+                            <text x="30" y="150" text-anchor="middle" font-size="12" fill="#333">75%</text>
+                            <text x="30" y="250" text-anchor="middle" font-size="12" fill="#333">50%</text>
+                            <text x="30" y="350" text-anchor="middle" font-size="12" fill="#333">25%</text>
                             
                             <!-- X-axis labels -->
-                            <text x="150" y="370" text-anchor="middle" font-size="12">Fold 1</text>
-                            <text x="250" y="370" text-anchor="middle" font-size="12">Fold 2</text>
-                            <text x="350" y="370" text-anchor="middle" font-size="12">Fold 3</text>
+                            <text x="150" y="370" text-anchor="middle" font-size="12" fill="#333">Fold 1</text>
+                            <text x="250" y="370" text-anchor="middle" font-size="12" fill="#333">Fold 2</text>
+                            <text x="350" y="370" text-anchor="middle" font-size="12" fill="#333">Fold 3</text>
                             
                             <!-- Data points and line -->
                             <circle cx="150" cy="100" r="5" fill="#3498db" />
@@ -611,29 +824,29 @@
                 <div class="visualization-card">
                     <div class="card-header">Zhejiang Map</div>
                     <div class="card-content" id="map-container">
-                        <svg width="500" height="400" viewBox="0 0 500 400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <!-- Simplified Zhejiang province outline -->
                             <path d="M 100 100 L 150 80 L 200 120 L 250 100 L 300 150 L 350 120 L 400 180 L 380 250 L 320 280 L 250 220 L 180 260 L 120 200 Z" 
                                   fill="#a8d5e5" stroke="#2c3e50" stroke-width="2" />
                             
                             <!-- Major cities -->
                             <circle cx="200" cy="150" r="8" fill="#e74c3c" />
-                            <text x="210" y="145" font-size="12" font-weight="bold">Hangzhou</text>
+                            <text x="210" y="145" font-size="12" font-weight="bold" fill="#333">Hangzhou</text>
                             
                             <circle cx="280" cy="180" r="8" fill="#e74c3c" />
-                            <text x="290" y="175" font-size="12" font-weight="bold">Ningbo</text>
+                            <text x="290" y="175" font-size="12" font-weight="bold" fill="#333">Ningbo</text>
                             
                             <circle cx="150" cy="200" r="8" fill="#e74c3c" />
-                            <text x="160" y="195" font-size="12" font-weight="bold">Wenzhou</text>
+                            <text x="160" y="195" font-size="12" font-weight="bold" fill="#333">Wenzhou</text>
                             
                             <circle cx="320" cy="220" r="6" fill="#3498db" />
-                            <text x="330" y="215" font-size="10">Shaoxing</text>
+                            <text x="330" y="215" font-size="10" fill="#333">Shaoxing</text>
                             
                             <circle cx="250" cy="250" r="6" fill="#3498db" />
-                            <text x="260" y="245" font-size="10">Jinhua</text>
+                            <text x="260" y="245" font-size="10" fill="#333">Jinhua</text>
                             
                             <!-- Title -->
-                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Zhejiang Province</text>
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Zhejiang Province</text>
                         </svg>
                     </div>
                 </div>
@@ -642,7 +855,7 @@
                 <div class="visualization-card">
                     <div class="card-header">Mathematical Plots</div>
                     <div class="card-content" id="math-plots-container">
-                        <svg width="500" height="400" viewBox="0 0 500 400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <!-- Coordinate system -->
                             <line x1="50" y1="200" x2="450" y2="200" stroke="#333" stroke-width="1" />
                             <line x1="250" y1="50" x2="250" y2="350" stroke="#333" stroke-width="1" />
@@ -666,8 +879,8 @@
                                   stroke="#2ecc71" stroke-width="2" fill="none" />
                             
                             <!-- Labels -->
-                            <text x="470" y="200" text-anchor="start" font-size="12">x</text>
-                            <text x="250" y="30" text-anchor="middle" font-size="12">y</text>
+                            <text x="470" y="200" text-anchor="start" font-size="12" fill="#333">x</text>
+                            <text x="250" y="30" text-anchor="middle" font-size="12" fill="#333">y</text>
                             <text x="100" y="170" text-anchor="middle" font-size="10" fill="#3498db">sin(x)</text>
                             <text x="100" y="280" text-anchor="middle" font-size="10" fill="#e74c3c">cos(x)</text>
                             <text x="400" y="100" text-anchor="middle" font-size="10" fill="#2ecc71">x²</text>
@@ -679,10 +892,10 @@
                 <div class="visualization-card">
                     <div class="card-header">Word Network</div>
                     <div class="card-content" id="network-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <!-- Central node -->
                             <circle cx="250" cy="200" r="30" fill="#3498db" />
-                            <text x="250" y="205" text-anchor="middle" fill="white" font-weight="bold">Data</text>
+                            <text x="250" y="205" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Data</text>
                             
                             <!-- Connected nodes -->
                             <circle cx="150" cy="120" r="20" fill="#e74c3c" />
@@ -728,39 +941,39 @@
                 <div class="visualization-card">
                     <div class="card-header">Model Frequency Distribution</div>
                     <div class="card-content" id="frequency-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <!-- X-axis -->
                             <line x1="50" y1="350" x2="450" y2="350" stroke="#333" stroke-width="2" />
                             <!-- Y-axis -->
                             <line x1="50" y1="50" x2="50" y2="350" stroke="#333" stroke-width="2" />
                             
                             <!-- Y-axis labels -->
-                            <text x="30" y="50" text-anchor="middle" font-size="12">100</text>
-                            <text x="30" y="150" text-anchor="middle" font-size="12">75</text>
-                            <text x="30" y="250" text-anchor="middle" font-size="12">50</text>
-                            <text x="30" y="350" text-anchor="middle" font-size="12">25</text>
+                            <text x="30" y="50" text-anchor="middle" font-size="12" fill="#333">100</text>
+                            <text x="30" y="150" text-anchor="middle" font-size="12" fill="#333">75</text>
+                            <text x="30" y="250" text-anchor="middle" font-size="12" fill="#333">50</text>
+                            <text x="30" y="350" text-anchor="middle" font-size="12" fill="#333">25</text>
                             
                             <!-- Bars -->
                             <rect x="80" y="250" width="40" height="100" fill="#3498db" />
-                            <text x="100" y="245" text-anchor="middle" font-size="12">CNN</text>
+                            <text x="100" y="245" text-anchor="middle" font-size="12" fill="#333">CNN</text>
                             
                             <rect x="140" y="200" width="40" height="150" fill="#3498db" />
-                            <text x="160" y="195" text-anchor="middle" font-size="12">RNN</text>
+                            <text x="160" y="195" text-anchor="middle" font-size="12" fill="#333">RNN</text>
                             
                             <rect x="200" y="150" width="40" height="200" fill="#3498db" />
-                            <text x="220" y="145" text-anchor="middle" font-size="12">LSTM</text>
+                            <text x="220" y="145" text-anchor="middle" font-size="12" fill="#333">LSTM</text>
                             
                             <rect x="260" y="100" width="40" height="250" fill="#3498db" />
-                            <text x="280" y="95" text-anchor="middle" font-size="12">Transformer</text>
+                            <text x="280" y="95" text-anchor="middle" font-size="12" fill="#333">Transformer</text>
                             
                             <rect x="320" y="180" width="40" height="170" fill="#3498db" />
-                            <text x="340" y="175" text-anchor="middle" font-size="12">GAN</text>
+                            <text x="340" y="175" text-anchor="middle" font-size="12" fill="#333">GAN</text>
                             
                             <rect x="380" y="220" width="40" height="130" fill="#3498db" />
-                            <text x="400" y="215" text-anchor="middle" font-size="12">BERT</text>
+                            <text x="400" y="215" text-anchor="middle" font-size="12" fill="#333">BERT</text>
                             
                             <!-- Title -->
-                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Model Usage Frequency</text>
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Model Usage Frequency</text>
                         </svg>
                     </div>
                 </div>
@@ -769,7 +982,7 @@
                 <div class="visualization-card">
                     <div class="card-header">Transformer Architecture</div>
                     <div class="card-content" id="transformer-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <!-- Input -->
                             <rect x="50" y="150" width="80" height="40" fill="#3498db" stroke="#2c3e50" stroke-width="2" />
                             <text x="90" y="175" text-anchor="middle" fill="white" font-size="10">Input</text>
@@ -784,7 +997,7 @@
                             
                             <!-- Encoder Stack -->
                             <rect x="350" y="50" width="100" height="300" fill="#9b59b6" stroke="#2c3e50" stroke-width="2" />
-                            <text x="400" y="30" text-anchor="middle" font-size="12" font-weight="bold">Encoder</text>
+                            <text x="400" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Encoder</text>
                             
                             <!-- Encoder Layers -->
                             <rect x="370" y="80" width="60" height="40" fill="#8e44ad" stroke="#2c3e50" stroke-width="1" />
@@ -797,7 +1010,7 @@
                             <text x="400" y="200" text-anchor="middle" fill="white" font-size="8">Add & Norm</text>
                             
                             <!-- Repeat pattern -->
-                            <text x="400" y="230" text-anchor="middle" font-size="10">...</text>
+                            <text x="400" y="230" text-anchor="middle" font-size="10" fill="#333">...</text>
                             
                             <rect x="370" y="250" width="60" height="40" fill="#8e44ad" stroke="#2c3e50" stroke-width="1" />
                             <text x="400" y="270" text-anchor="middle" fill="white" font-size="8">Layer N</text>
@@ -813,7 +1026,7 @@
                             <line x1="450" y1="170" x2="470" y2="170" stroke="#333" stroke-width="2" />
                             
                             <!-- Title -->
-                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Transformer Architecture</text>
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Transformer Architecture</text>
                         </svg>
                     </div>
                 </div>
@@ -822,7 +1035,7 @@
                 <div class="visualization-card">
                     <div class="card-header">Interactive Stick Figure</div>
                     <div class="card-content" id="stick-figure-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <!-- Head -->
                             <circle cx="250" cy="100" r="30" fill="#f1c40f" stroke="#2c3e50" stroke-width="2" />
                             
@@ -846,8 +1059,8 @@
                             <line x1="50" y1="300" x2="450" y2="300" stroke="#7f8c8d" stroke-width="3" />
                             
                             <!-- Title -->
-                            <text x="250" y="350" text-anchor="middle" font-size="16" font-weight="bold">Interactive Stick Figure</text>
-                            <text x="250" y="370" text-anchor="middle" font-size="12">(Hover to see animation)</text>
+                            <text x="250" y="350" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Interactive Stick Figure</text>
+                            <text x="250" y="370" text-anchor="middle" font-size="12" fill="#333">(Hover to see animation)</text>
                         </svg>
                     </div>
                 </div>
@@ -856,7 +1069,7 @@
                 <div class="visualization-card">
                     <div class="card-header">Bimodal Probability Density</div>
                     <div class="card-content" id="probability-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <!-- X-axis -->
                             <line x1="50" y1="350" x2="450" y2="350" stroke="#333" stroke-width="2" />
                             <!-- Y-axis -->
@@ -879,7 +1092,7 @@
                             <text x="100" y="80" text-anchor="middle" font-size="12" fill="#e74c3c">Distribution 2</text>
                             
                             <!-- Title -->
-                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Bimodal Probability Density</text>
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Bimodal Probability Density</text>
                         </svg>
                     </div>
                 </div>
@@ -888,7 +1101,7 @@
                 <div class="visualization-card">
                     <div class="card-header">Square Overlap</div>
                     <div class="card-content" id="square-overlap-container">
-                        <svg width="500" height="400">
+                        <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
                             <!-- First square -->
                             <rect x="150" y="150" width="200" height="200" fill="rgba(52, 152, 219, 0.7)" stroke="#2980b9" stroke-width="2" />
                             
@@ -904,7 +1117,7 @@
                             <text x="150" y="140" text-anchor="end" font-size="12" fill="#2980b9">Square A</text>
                             
                             <!-- Title -->
-                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold">Square Overlap Visualization</text>
+                            <text x="250" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Square Overlap Visualization</text>
                         </svg>
                     </div>
                 </div>
@@ -915,7 +1128,7 @@
         <div class="tab-content" id="psi">
             <div class="psi-section">
                 <h2>Singapore PSI Data</h2>
-                <h3 id="timestring"></h3>
+                <h3 id="timestring">Timestamp: 2023-10-15T12:00:00+08:00</h3>
                 <table class="psi-table" id="PSItable"> 
                     <tr>
                         <th>Metric</th>
@@ -926,6 +1139,7 @@
                         <th>South</th>
                         <th>National</th>
                     </tr>
+                    <!-- Data will be populated by JavaScript -->
                 </table>
             </div>
         </div>
@@ -934,35 +1148,55 @@
         <div class="tab-content" id="svg">
             <div class="svg-section">
                 <h2>SVG Effects Showcase</h2>
+                <p class="description">This table demonstrates various SVG transformations and filters applied to different SVG images. Each row shows a different image with five transformation effects.</p>
+                
                 <table class="svg-table">
+                    <!-- 添加列标题 -->
+                    <tr class="col-title">
+                        <td>Original</td>
+                        <td>Mirror</td>
+                        <td>Rotate 180°</td>
+                        <td>Squeeze</td>
+                        <td>Grayscale</td>
+                    </tr>
+                    
+                    <!-- 行1: 红色三角形 -->
                     <tr>
                         <td class="original">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100" height="100">
-                            <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            </svg>
+                            <div class="row-title">Red Triangle</div>
                         </td>
                         <td class="mirror">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100" height="100">
-                            <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            </svg>
                         </td>
                         <td class="rotate180">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100" height="100">
-                            <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            </svg>
                         </td>
                         <td class="squeeze">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100" height="100">
-                            <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            </svg>
                         </td>
                         <td class="grayscale">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100" height="100">
-                            <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                <path d="M32 0 L64 64 H0 Z" fill="red"/>
+                            </svg>
                         </td>
                     </tr>
 
+                    <!-- 行2: 蓝色圆形 -->
                     <tr>
                         <td class="original">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                                 <circle cx="32" cy="32" r="25" fill="skyblue"/>
                             </svg>
+                            <div class="row-title">Blue Circle</div>
                         </td>
                         <td class="mirror">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
@@ -986,42 +1220,177 @@
                         </td>
                     </tr>
                     
+                    <!-- 行3: 计算器图标 -->
                     <tr>
                         <td class="original">
-                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" alt="Calculator">
+                            <div class="row-title">Calculator</div>
                         </td>
                         <td class="mirror">
-                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" alt="Calculator">
                         </td>
                         <td class="rotate180">
-                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" alt="Calculator">
                         </td>
                         <td class="squeeze">
-                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" alt="Calculator">
                         </td>
                         <td class="grayscale">
-                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/530644/calculator.svg" alt="Calculator">
                         </td>
                     </tr>
                     
+                    <!-- 行4: 天气图标 -->
                     <tr>
                         <td class="original">
-                            <img src="https://www.svgrepo.com/show/503853/weather.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/503853/weather.svg" alt="Weather">
+                            <div class="row-title">Weather</div>
                         </td>
                         <td class="mirror">
-                            <img src="https://www.svgrepo.com/show/503853/weather.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/503853/weather.svg" alt="Weather">
                         </td>
                         <td class="rotate180">
-                            <img src="https://www.svgrepo.com/show/503853/weather.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/503853/weather.svg" alt="Weather">
                         </td>
                         <td class="squeeze">
-                            <img src="https://www.svgrepo.com/show/503853/weather.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/503853/weather.svg" alt="Weather">
                         </td>
                         <td class="grayscale">
-                            <img src="https://www.svgrepo.com/show/503853/weather.svg" width="100" height="100">
+                            <img src="https://www.svgrepo.com/show/503853/weather.svg" alt="Weather">
+                        </td>
+                    </tr>
+                    
+                    <!-- 行5: 雷电图标 -->
+                    <tr>
+                        <td class="original">
+                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" alt="Thunder">
+                            <div class="row-title">Thunder</div>
+                        </td>
+                        <td class="mirror">
+                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" alt="Thunder">
+                        </td>
+                        <td class="rotate180">
+                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" alt="Thunder">
+                        </td>
+                        <td class="squeeze">
+                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" alt="Thunder">
+                        </td>
+                        <td class="grayscale">
+                            <img src="https://www.svgrepo.com/show/508319/thunder.svg" alt="Thunder">
+                        </td>
+                    </tr>
+                    
+                    <!-- 行6: 下雨图标 -->
+                    <tr>
+                        <td class="original">
+                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" alt="Rain">
+                            <div class="row-title">Rain</div>
+                        </td>
+                        <td class="mirror">
+                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" alt="Rain">
+                        </td>
+                        <td class="rotate180">
+                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" alt="Rain">
+                        </td>
+                        <td class="squeeze">
+                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" alt="Rain">
+                        </td>
+                        <td class="grayscale">
+                            <img src="https://www.svgrepo.com/show/252489/weather-rain.svg" alt="Rain">
+                        </td>
+                    </tr>
+                    
+                    <!-- 行7: 鸭子图标 -->
+                    <tr>
+                        <td class="original">
+                            <img src="https://www.svgrepo.com/show/530557/duck.svg" alt="Duck">
+                            <div class="row-title">Duck</div>
+                        </td>
+                        <td class="mirror">
+                            <img src="https://www.svgrepo.com/show/530557/duck.svg" alt="Duck">
+                        </td>
+                        <td class="rotate180">
+                            <img src="https://www.svgrepo.com/show/530557/duck.svg" alt="Duck">
+                        </td>
+                        <td class="squeeze">
+                            <img src="https://www.svgrepo.com/show/530557/duck.svg" alt="Duck">
+                        </td>
+                        <td class="grayscale">
+                            <img src="https://www.svgrepo.com/show/530557/duck.svg" alt="Duck">
+                        </td>
+                    </tr>
+                    
+                    <!-- 行8: 穹顶图标 -->
+                    <tr>
+                        <td class="original">
+                            <img src="https://www.svgrepo.com/show/468604/dome.svg" alt="Dome">
+                            <div class="row-title">Dome</div>
+                        </td>
+                        <td class="mirror">
+                            <img src="https://www.svgrepo.com/show/468604/dome.svg" alt="Dome">
+                        </td>
+                        <td class="rotate180">
+                            <img src="https://www.svgrepo.com/show/468604/dome.svg" alt="Dome">
+                        </td>
+                        <td class="squeeze">
+                            <img src="https://www.svgrepo.com/show/468604/dome.svg" alt="Dome">
+                        </td>
+                        <td class="grayscale">
+                            <img src="https://www.svgrepo.com/show/468604/dome.svg" alt="Dome">
+                        </td>
+                    </tr>
+                    
+                    <!-- 行9: 温度计图标 -->
+                    <tr>
+                        <td class="original">
+                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" alt="Thermometer">
+                            <div class="row-title">Thermometer</div>
+                        </td>
+                        <td class="mirror">
+                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" alt="Thermometer">
+                        </td>
+                        <td class="rotate180">
+                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" alt="Thermometer">
+                        </td>
+                        <td class="squeeze">
+                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" alt="Thermometer">
+                        </td>
+                        <td class="grayscale">
+                            <img src="https://www.svgrepo.com/show/492822/thermometer.svg" alt="Thermometer">
+                        </td>
+                    </tr>
+                    
+                    <!-- 行10: 飓风图标 -->
+                    <tr>
+                        <td class="original">
+                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" alt="Hurricane">
+                            <div class="row-title">Hurricane</div>
+                        </td>
+                        <td class="mirror">
+                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" alt="Hurricane">
+                        </td>
+                        <td class="rotate180">
+                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" alt="Hurricane">
+                        </td>
+                        <td class="squeeze">
+                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" alt="Hurricane">
+                        </td>
+                        <td class="grayscale">
+                            <img src="https://www.svgrepo.com/show/461689/hurricane.svg" alt="Hurricane">
                         </td>
                     </tr>
                 </table>
+                
+                <div class="svg-description">
+                    <h3>SVG Transformations Applied:</h3>
+                    <ul>
+                        <li><strong>Mirror:</strong> Horizontal flip using <code>transform: scaleX(-1)</code></li>
+                        <li><strong>Rotate 180°:</strong> 180-degree rotation using <code>transform: rotate(180deg)</code></li>
+                        <li><strong>Squeeze:</strong> Vertical compression using <code>transform: scaleY(0.5)</code></li>
+                        <li><strong>Grayscale:</strong> Color removal using <code>filter: grayscale(100%)</code></li>
+                    </ul>
+                    <p>Hover over any cell to see a subtle highlight effect. The table is responsive and will scroll horizontally on smaller screens.</p>
+                </div>
             </div>
         </div>
         
@@ -1049,15 +1418,57 @@
                                 <option value="Certified">Certified Robust Accuracy</option>
                             </select>
                         </div>
+                        
+                        <div class="control-group">
+                            <label for="modelFilter" class="dashboard-label">Filter Models:</label>
+                            <select id="modelFilter" class="dashboard-select">
+                                <option value="All">All Models</option>
+                                <option value="ERM">ERM</option>
+                                <option value="DA">DA</option>
+                                <option value="PGDT">PGDT</option>
+                                <option value="TRADES">TRADES</option>
+                                <option value="MART">MART</option>
+                                <option value="RS">RS</option>
+                                <option value="IBP">IBP</option>
+                                <option value="PRL">PRL</option>
+                                <option value="TandT">TandT</option>
+                            </select>
+                        </div>
                     </div>
                     
                     <div class="charts-container">
-                        <div class="chart">
-                            <div class="chart-title">Performance Comparison</div>
+                        <div class="chart model-chart">
+                            <div class="chart-title">Radar Chart Analysis</div>
                             <div class="radar-container">
                                 <svg id="radarChart" width="500" height="500"></svg>
                             </div>
+                            <div class="dashboard-legend" id="radarLegend"></div>
                         </div>
+                        
+                        <div class="chart model-chart">
+                            <div class="chart-title">Heatmap Analysis</div>
+                            <div class="heatmap-container">
+                                <svg id="heatmap" width="500" height="500"></svg>
+                            </div>
+                            <div class="dashboard-legend" id="heatmapLegend"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data 2: Adversarial Robustness Heatmap -->
+                <div class="dashboard-container">
+                    <div class="data-label">Adversarial Robustness Analysis</div>
+                    <div class="section-header">Adversarial Robustness Analysis</div>
+                    <div class="dashboard-description">
+                        This heatmap shows the accuracy of different defense models under various adversarial attacks. 
+                        Green indicates higher accuracy (better robustness), while red indicates lower accuracy.
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="robustness-heatmap">
+                            <div id="robustnessHeatmap"></div>
+                        </div>
+                        <div class="robustness-legend" id="robustnessLegend"></div>
                     </div>
                 </div>
             </div>
@@ -1096,13 +1507,6 @@
             // Initialize PSI data
             fetchPSIData();
             
-            // Initialize model performance dashboard if it's the active tab
-            if (document.querySelector('.tab[data-tab="model-performance"]').classList.contains('active')) {
-                setTimeout(() => {
-                    initModelPerformanceDashboard();
-                }, 100);
-            }
-            
             // Add interactivity to stick figure
             const stickFigure = document.getElementById('stick-figure-container');
             if (stickFigure) {
@@ -1136,6 +1540,13 @@
                     });
                 });
             }
+            
+            // Initialize model performance dashboard if it's the active tab
+            if (document.querySelector('.tab[data-tab="model-performance"]').classList.contains('active')) {
+                setTimeout(() => {
+                    initModelPerformanceDashboard();
+                }, 100);
+            }
         });
 
         // PSI Data Fetching Function
@@ -1161,18 +1572,15 @@
                     }]
                 };
 
-                const data = mockData; // In a real implementation, you would fetch from the API
-
-                const timestamp = data.items[0].update_timestamp;
-                document.getElementById("timestring").textContent = `Timestamp: ${timestamp}`;
-
+                const data = mockData;
                 const readings = data.items[0].readings;
+                const psiTable = document.getElementById("PSItable");
 
                 for (const metric in readings) {
                     const row = document.createElement("tr");
 
                     const cellMetric = document.createElement("td");
-                    cellMetric.textContent = metric;
+                    cellMetric.textContent = formatMetricName(metric);
                     row.appendChild(cellMetric);
 
                     ["central", "west", "east", "north", "south", "national"].forEach(region => {
@@ -1181,7 +1589,7 @@
                         row.appendChild(cell);
                     });
 
-                    document.getElementById("PSItable").appendChild(row);
+                    psiTable.appendChild(row);
                 }
             } catch (error) {
                 console.error("Error fetching PSI data:", error);
@@ -1189,40 +1597,94 @@
             }
         }
 
+        // Helper function to format metric names
+        function formatMetricName(metric) {
+            return metric
+                .replace(/_/g, ' ')
+                .replace(/\b\w/g, l => l.toUpperCase())
+                .replace('Psi', 'PSI')
+                .replace('Pm10', 'PM10')
+                .replace('Pm25', 'PM2.5')
+                .replace('So2', 'SO₂')
+                .replace('No2', 'NO₂')
+                .replace('Co', 'CO')
+                .replace('O3', 'O₃');
+        }
+
         // Model Performance Dashboard Code
         function initModelPerformanceDashboard() {
             // Data 1: Model Performance
             const data1 = [
-                {Approach: "ERM", "Std Acc - CIFAR100": 81.03, "Std Acc - CIFAR10": 94.85, "Std Acc - SVHN": 94.44, "Std Acc - MNIST": 99.37},
-                {Approach: "DA", "Std Acc - CIFAR100": 78.27, "Std Acc - CIFAR10": 94.21, "Std Acc - SVHN": 94.69, "Std Acc - MNIST": 99.42},
-                {Approach: "PGDT", "Std Acc - CIFAR100": 64.35, "Std Acc - CIFAR10": 84.38, "Std Acc - SVHN": 91.19, "Std Acc - MNIST": 99.16},
-                {Approach: "TRADES", "Std Acc - CIFAR100": 62.55, "Std Acc - CIFAR10": 80.42, "Std Acc - SVHN": 86.16, "Std Acc - MNIST": 99.1},
-                {Approach: "MART", "Std Acc - CIFAR100": 63.68, "Std Acc - CIFAR10": 81.54, "Std Acc - SVHN": 90.2, "Std Acc - MNIST": 98.94},
-                {Approach: "RS", "Std Acc - CIFAR100": 56.87, "Std Acc - CIFAR10": 89.45, "Std Acc - SVHN": 88.35, "Std Acc - MNIST": 97.16},
-                {Approach: "IBP", "Std Acc - CIFAR100": 39.45, "Std Acc - CIFAR10": 48.4, "Std Acc - SVHN": 73.09, "Std Acc - MNIST": 97.78},
-                {Approach: "PRL", "Std Acc - CIFAR100": 64.89, "Std Acc - CIFAR10": 93.82, "Std Acc - SVHN": 92, "Std Acc - MNIST": 99.32},
-                {Approach: "TandT", "Std Acc - CIFAR100": 65.56, "Std Acc - CIFAR10": 94.23, "Std Acc - SVHN": 94.79, "Std Acc - MNIST": 99.32},
+                {Approach: "ERM", "Std Acc - CIFAR100": 81.03, "Std Acc - CIFAR10": 94.85, "Std Acc - SVHN": 94.44, "Std Acc - MNIST": 99.37, "CRR - CIFAR100": 9.28, "CRR - CIFAR10": 1.25, "CRR - SVHN": 52.72, "CRR - MNIST": 26.01, "CRA - CIFAR100": 4.52, "CRA - CIFAR10": 1.25, "CRA - SVHN": 51.04, "CRA - MNIST": 24.96},
+                {Approach: "DA", "Std Acc - CIFAR100": 78.27, "Std Acc - CIFAR10": 94.21, "Std Acc - SVHN": 94.69, "Std Acc - MNIST": 99.42, "CRR - CIFAR100": 15.04, "CRR - CIFAR10": 81.08, "CRR - SVHN": 82.08, "CRR - MNIST": 85.23, "CRA - CIFAR100": 6.15, "CRA - CIFAR10": 76.07, "CRA - SVHN": 82.01, "CRA - MNIST": 84.12},
+                {Approach: "PGDT", "Std Acc - CIFAR100": 64.35, "Std Acc - CIFAR10": 84.38, "Std Acc - SVHN": 91.19, "Std Acc - MNIST": 99.16, "CRR - CIFAR100": 57.07, "CRR - CIFAR10": 87.07, "CRR - SVHN": 87.89, "CRR - MNIST": 94.65, "CRA - CIFAR100": 32.93, "CRA - CIFAR10": 82.9, "CRA - SVHN": 86.68, "CRA - MNIST": 94.63},
+                {Approach: "TRADES", "Std Acc - CIFAR100": 62.55, "Std Acc - CIFAR10": 80.42, "Std Acc - SVHN": 86.16, "Std Acc - MNIST": 99.1, "CRR - CIFAR100": 59.27, "CRR - CIFAR10": 88.54, "CRR - SVHN": 87.89, "CRR - MNIST": 94.76, "CRA - CIFAR100": 38.85, "CRA - CIFAR10": 78.8, "CRA - SVHN": 84.76, "CRA - MNIST": 94.61},
+                {Approach: "MART", "Std Acc - CIFAR100": 63.68, "Std Acc - CIFAR10": 81.54, "Std Acc - SVHN": 90.2, "Std Acc - MNIST": 98.94, "CRR - CIFAR100": 58.79, "CRR - CIFAR10": 78.9, "CRR - SVHN": 85.23, "CRR - MNIST": 94.13, "CRA - CIFAR100": 49.37, "CRA - CIFAR10": 72.21, "CRA - SVHN": 78.82, "CRA - MNIST": 94.09},
+                {Approach: "RS", "Std Acc - CIFAR100": 56.87, "Std Acc - CIFAR10": 89.45, "Std Acc - SVHN": 88.35, "Std Acc - MNIST": 97.16, "CRR - CIFAR100": 60.38, "CRR - CIFAR10": 90, "CRR - SVHN": 76.29, "CRR - MNIST": 87.15, "CRA - CIFAR100": 47.5, "CRA - CIFAR10": 87.98, "CRA - SVHN": 70.64, "CRA - MNIST": 86.29},
+                {Approach: "IBP", "Std Acc - CIFAR100": 39.45, "Std Acc - CIFAR10": 48.4, "Std Acc - SVHN": 73.09, "Std Acc - MNIST": 97.78, "CRR - CIFAR100": 49.34, "CRR - CIFAR10": 54.7, "CRR - SVHN": 61.94, "CRR - MNIST": 89.18, "CRA - CIFAR100": 29.2, "CRA - CIFAR10": 40, "CRA - SVHN": 57.26, "CRA - MNIST": 88.51},
+                {Approach: "PRL", "Std Acc - CIFAR100": 64.89, "Std Acc - CIFAR10": 93.82, "Std Acc - SVHN": 92, "Std Acc - MNIST": 99.32, "CRR - CIFAR100": 56.71, "CRR - CIFAR10": 90.71, "CRR - SVHN": 93.11, "CRR - MNIST": 96.03, "CRA - CIFAR100": 50.77, "CRA - CIFAR10": 90.63, "CRA - SVHN": 91.07, "CRA - MNIST": 95.01},
+                {Approach: "TandT", "Std Acc - CIFAR100": 65.56, "Std Acc - CIFAR10": 94.23, "Std Acc - SVHN": 94.79, "Std Acc - MNIST": 99.32, "CRR - CIFAR100": 62.05, "CRR - CIFAR10": 95.08, "CRR - SVHN": 93.15, "CRR - MNIST": 97.8, "CRA - CIFAR100": 52.07, "CRA - CIFAR10": 91.75, "CRA - SVHN": 92.81, "CRA - MNIST": 96.8},
+            ];
+
+            // Data 2: Adversarial Robustness
+            const data2 = [
+                { attack: "No Attack", ERM: 94.85, DA: 94.21, PGDT: 84.38, TRADES: 80.42, MART: 81.54, RS: 89.45, IBP: 48.4, PRL: 93.82, TandT: 94.23 },
+                { attack: "TIFGSM", ERM: 35.1, DA: 33, PGDT: 65.7, TRADES: 62.9, MART: 69.1, RS: 45.4, IBP: 40.2, PRL: 34, TandT: 92.8 },
+                { attack: "MIFGSM", ERM: 0, DA: 0, PGDT: 50.9, TRADES: 51.9, MART: 50.5, RS: 5.8, IBP: 38.1, PRL: 0, TandT: 92.8 },
+                { attack: "DIFGSM", ERM: 1, DA: 0, PGDT: 51.75, TRADES: 50.5, MART: 53.6, RS: 4.1, IBP: 38.1, PRL: 3.1, TandT: 92.8 },
+                { attack: "VMIFGSM", ERM: 0, DA: 0, PGDT: 51.1, TRADES: 50.9, MART: 51.9, RS: 4.1, IBP: 38.1, PRL: 0, TandT: 93.9 },
+                { attack: "TPGD", ERM: 38.1, DA: 39.2, PGDT: 69.3, TRADES: 69.1, MART: 70.1, RS: 48.5, IBP: 50, PRL: 28.9, TandT: 91.8 },
+                { attack: "FGSM", ERM: 29.9, DA: 25.8, PGDT: 57.95, TRADES: 54.6, MART: 61.9, RS: 28.9, IBP: 38.1, PRL: 25.8, TandT: 93.8 },
+                { attack: "RFGSM", ERM: 0, DA: 0, PGDT: 49.15, TRADES: 50.4, MART: 48.5, RS: 3.7, IBP: 38.1, PRL: 0, TandT: 90 },
+                { attack: "BIM", ERM: 0, DA: 0, PGDT: 52, TRADES: 57.2, MART: 47.4, RS: 2.1, IBP: 38.1, PRL: 0, TandT: 90.7 },
+                { attack: "FAB", ERM: 1, DA: 2.1, PGDT: 43, TRADES: 46.4, MART: 40.2, RS: 5.3, IBP: 38.1, PRL: 4.1, TandT: 90.1 },
+                { attack: "CW", ERM: 0, DA: 0, PGDT: 32.2, TRADES: 35.1, MART: 29.9, RS: 1, IBP: 40.2, PRL: 1, TandT: 92.9 },
+                { attack: "UPGD", ERM: 0, DA: 0, PGDT: 49.85, TRADES: 50.5, MART: 49.8, RS: 5.1, IBP: 38.1, PRL: 0, TandT: 93.8 },
+                { attack: "FFGSM", ERM: 19.6, DA: 23.7, PGDT: 60.55, TRADES: 55.7, MART: 66, RS: 33, IBP: 42.3, PRL: 29.9, TandT: 92.8 },
+                { attack: "Jitter", ERM: 11.3, DA: 12.4, PGDT: 48.15, TRADES: 47.4, MART: 49.5, RS: 34, IBP: 39.2, PRL: 24.7, TandT: 90.7 },
+                { attack: "PGD", ERM: 0, DA: 0, PGDT: 57.4, TRADES: 54.6, MART: 60.8, RS: 7.2, IBP: 40.2, PRL: 0, TandT: 91.8 },
+                { attack: "EOTPGD", ERM: 0, DA: 0, PGDT: 50.1, TRADES: 50.3, MART: 50.5, RS: 3, IBP: 38.1, PRL: 0, TandT: 90.7 },
+                { attack: "APGD", ERM: 0, DA: 0, PGDT: 48.4, TRADES: 51, MART: 46.4, RS: 1, IBP: 38.1, PRL: 0, TandT: 90.7 },
+                { attack: "NIFGSM", ERM: 0, DA: 0, PGDT: 57.95, TRADES: 56.7, MART: 59.8, RS: 7.2, IBP: 38.1, PRL: 1, TandT: 92.8 },
+                { attack: "SiniFGSM", ERM: 4.1, DA: 1, PGDT: 59, TRADES: 56.7, MART: 61.9, RS: 23.7, IBP: 38.1, PRL: 12.4, TandT: 93.7 },
+                { attack: "VNIFGSM", ERM: 0, DA: 0, PGDT: 50.45, TRADES: 53, MART: 48.5, RS: 5.1, IBP: 38.1, PRL: 0, TandT: 92.9 },
+                { attack: "APGDT", ERM: 0, DA: 0, PGDT: 40.9, TRADES: 44.3, MART: 38.1, RS: 0, IBP: 38.1, PRL: 0, TandT: 88.7 },
+                { attack: "Square", ERM: 0, DA: 1, PGDT: 50.4, TRADES: 54, MART: 47.4, RS: 3.1, IBP: 38.1, PRL: 2.1, TandT: 88.08 },
+                { attack: "Add Gaussian Noise", ERM: 25.8, DA: 43.3, PGDT: 79.1, TRADES: 78.4, MART: 80.4, RS: 74.2, IBP: 42.3, PRL: 45.4, TandT: 87.6 },
+                { attack: "OnePixel", ERM: 79.4, DA: 83.5, PGDT: 78.05, TRADES: 74.2, MART: 82.5, RS: 83.5, IBP: 42.5, PRL: 80.4, TandT: 89.7 },
+                { attack: "Pixle", ERM: 0, DA: 0, PGDT: 12.55, TRADES: 11.3, MART: 14.4, RS: 1, IBP: 10.3, PRL: 0, TandT: 17.5 },
+                { attack: "PGDL2", ERM: 1, DA: 0, PGDT: 35.8, TRADES: 36.1, MART: 36.1, RS: 5.2, IBP: 36.1, PRL: 0, TandT: 92.9 }
             ];
 
             // Define metrics for Data 1
             const metrics = {
-                "Standard": ["Std Acc - CIFAR100", "Std Acc - CIFAR10", "Std Acc - SVHN", "Std Acc - MNIST"]
+                "Standard": ["Std Acc - CIFAR100", "Std Acc - CIFAR10", "Std Acc - SVHN", "Std Acc - MNIST"],
+                "Robustness": ["CRR - CIFAR100", "CRR - CIFAR10", "CRR - SVHN", "CRR - MNIST"],
+                "Certified": ["CRA - CIFAR100", "CRA - CIFAR10", "CRA - SVHN", "CRA - MNIST"]
             };
 
             // Color scale for Data 1
-            const colorScale1 = d3.scaleSequential(d3.interpolatePlasma).domain([0, data1.length]);
+            const colorScale1 = d3.scaleSequential(d3.interpolatePlasma).domain([0, 100]);
 
             // Initialize SVG elements for Data 1
             const radarSvg = d3.select("#radarChart"),
+                  heatmapSvg = d3.select("#heatmap"),
                   tooltip = d3.select("#dashboard-tooltip");
 
             const radarWidth = +radarSvg.attr("width"),
                   radarHeight = +radarSvg.attr("height"),
                   radarRadius = Math.min(radarWidth, radarHeight) / 2 - 60;
 
+            const heatmapWidth = +heatmapSvg.attr("width"),
+                  heatmapHeight = +heatmapSvg.attr("height");
+
             // Create radar chart group for Data 1
             const radarG = radarSvg.append("g")
                 .attr("transform", `translate(${radarWidth/2},${radarHeight/2})`);
+
+            // Create heatmap group for Data 1
+            const heatmapG = heatmapSvg.append("g")
+                .attr("transform", "translate(80, 50)");
 
             // Draw radar chart function for Data 1
             function drawRadar(metric) {
@@ -1233,179 +1695,709 @@
                 // Clear existing content
                 radarG.selectAll("*").remove();
                 
-                // Draw grid lines
-                for (let level = 1; level <= 5; level++) {
-                    const r = radarRadius / 5 * level;
-                    
-                    // Circular grid lines
-                    radarG.append("circle")
-                        .attr("r", r)
-                        .style("fill", "none")
-                        .style("stroke", "#CDCDCD")
-                        .style("stroke-dasharray", "2,2");
-                    
-                    // Grid labels
-                    radarG.append("text")
-                        .attr("x", 0)
-                        .attr("y", -r)
-                        .attr("dy", "0.35em")
-                        .text(`${level * 20}%`)
-                        .style("font-size", "10px")
-                        .style("fill", "#999")
-                        .style("text-anchor", "middle");
-                }
+                // Add loading animation
+                const loading = radarG.append("text")
+                    .attr("x", 0)
+                    .attr("y", 0)
+                    .attr("text-anchor", "middle")
+                    .attr("dy", "0.35em")
+                    .text("Loading...")
+                    .style("font-size", "16px")
+                    .style("fill", "#6c757d");
                 
-                // Draw axes
-                allAxis.forEach((axis, i) => {
-                    const angle = angleSlice * i - Math.PI / 2;
+                // Delay drawing for loading effect
+                setTimeout(() => {
+                    loading.remove();
                     
-                    // Axis line
-                    radarG.append("line")
-                        .attr("x1", 0)
-                        .attr("y1", 0)
-                        .attr("x2", rScale(100) * Math.cos(angle))
-                        .attr("y2", rScale(100) * Math.sin(angle))
-                        .attr("stroke", "#CDCDCD");
-                    
-                    // Axis label
-                    radarG.append("text")
-                        .attr("x", rScale(105) * Math.cos(angle))
-                        .attr("y", rScale(105) * Math.sin(angle))
-                        .text(axis.replace("Std Acc - ", ""))
-                        .attr("class", "axisLabel")
-                        .attr("text-anchor", "middle")
-                        .attr("dy", "0.35em");
-                });
-                
-                // Draw data paths
-                const paths = radarG.selectAll(".lineGroup")
-                    .data(data1)
-                    .enter()
-                    .append("g")
-                    .attr("class", "lineGroup");
-                
-                // Path animation
-                paths.append("path")
-                    .attr("d", d => {
-                        const lineGenerator = d3.lineRadial()
-                            .radius(a => rScale(d[a]))
-                            .angle((a, i) => i * angleSlice)
-                            .curve(d3.curveCardinalClosed);
-                        return lineGenerator(allAxis);
-                    })
-                    .attr("stroke", (d, i) => colorScale1(i))
-                    .attr("class", "line")
-                    .style("opacity", 0.8)
-                    .on("mouseover", function(event, d) {
-                        d3.selectAll(".line").classed("faded", true);
-                        d3.select(this).classed("faded", false).classed("highlight", true);
+                    // Draw grid lines
+                    for (let level = 1; level <= 5; level++) {
+                        const r = radarRadius / 5 * level;
                         
-                        // Add pulse animation
-                        d3.select(this)
+                        // Circular grid lines
+                        radarG.append("circle")
+                            .attr("r", 0) // Initial radius is 0
+                            .style("fill", "none")
+                            .style("stroke", "#e0e0e0")
+                            .style("stroke-dasharray", "2,2")
+                            .transition()
+                            .duration(800)
+                            .delay(level * 100)
+                            .ease(d3.easeCubicOut)
+                            .attr("r", r)
+                            .style("stroke", "#CDCDCD");
+                        
+                        // Grid labels
+                        radarG.append("text")
+                            .attr("x", 0)
+                            .attr("y", -r)
+                            .attr("dy", "0.35em")
+                            .text(`${level * 20}%`)
+                            .style("font-size", "10px")
+                            .style("fill", "#999")
+                            .style("text-anchor", "middle")
+                            .style("opacity", 0)
                             .transition()
                             .duration(500)
-                            .ease(d3.easeElasticOut)
-                            .attr("stroke-width", 4);
-                    })
-                    .on("mouseout", function() {
-                        d3.selectAll(".line").classed("faded", false).classed("highlight", false);
+                            .delay(level * 100 + 300)
+                            .style("opacity", 1);
+                    }
+                    
+                    // Draw axes
+                    allAxis.forEach((axis, i) => {
+                        const angle = angleSlice * i - Math.PI / 2;
                         
-                        // Restore original width
-                        d3.select(this)
+                        // Axis line
+                        radarG.append("line")
+                            .attr("x1", 0)
+                            .attr("y1", 0)
+                            .attr("x2", 0)
+                            .attr("y2", 0)
+                            .attr("stroke", "#CDCDCD")
                             .transition()
-                            .duration(300)
-                            .attr("stroke-width", 2);
-                    });
-                
-                // Data point animation
-                paths.selectAll(".dot")
-                    .data(d => allAxis.map(a => ({axis: a, value: d[a], Approach: d.Approach})))
-                    .enter()
-                    .append("circle")
-                    .attr("cx", d => rScale(d.value) * Math.cos(allAxis.indexOf(d.axis) * angleSlice - Math.PI / 2))
-                    .attr("cy", d => rScale(d.value) * Math.sin(allAxis.indexOf(d.axis) * angleSlice - Math.PI / 2))
-                    .attr("r", 5)
-                    .attr("fill", d => colorScale1(data1.findIndex(e => e.Approach === d.Approach)))
-                    .attr("class", "dot")
-                    .on("mouseover", function(event, d) {
-                        d3.select(this)
-                            .transition()
-                            .duration(200)
-                            .attr("r", 8)
-                            .style("fill-opacity", 1);
+                            .duration(800)
+                            .delay(i * 100 + 200)
+                            .ease(d3.easeCubicOut)
+                            .attr("x2", rScale(100) * Math.cos(angle))
+                            .attr("y2", rScale(100) * Math.sin(angle));
                         
-                        tooltip.transition()
-                            .duration(200)
-                            .style("opacity", 1)
-                            .style("transform", "translateY(0)");
-                        tooltip.html(`<h3>${d.Approach}</h3><p>${d.axis}: ${d.value}%</p>`)
-                            .style("left", (event.pageX + 10) + "px")
-                            .style("top", (event.pageY - 20) + "px");
-                    })
-                    .on("mousemove", function(event, d) {
-                        tooltip.style("left", (event.pageX + 10) + "px")
-                            .style("top", (event.pageY - 20) + "px");
-                    })
-                    .on("mouseout", function() {
-                        d3.select(this)
-                            .transition()
-                            .duration(300)
-                            .attr("r", 5)
-                            .style("fill-opacity", 0.8);
-                        
-                        tooltip.transition()
-                            .duration(200)
+                        // Axis label
+                        radarG.append("text")
+                            .attr("x", rScale(105) * Math.cos(angle))
+                            .attr("y", rScale(105) * Math.sin(angle))
+                            .text(axis.replace("Std Acc - ", "").replace("CRR - ", "").replace("CRA - ", ""))
+                            .attr("class", "axisLabel")
+                            .attr("text-anchor", "middle")
+                            .attr("dy", "0.35em")
                             .style("opacity", 0)
-                            .style("transform", "translateY(10px)");
+                            .transition()
+                            .duration(500)
+                            .delay(i * 100 + 400)
+                            .style("opacity", 1);
                     });
-                
-                // Add legend
-                const legend = radarG.append("g")
-                    .attr("transform", `translate(${-radarWidth/2 + 20}, ${-radarHeight/2 + 20})`);
-                
-                data1.forEach((d, i) => {
-                    const legendItem = legend.append("g")
-                        .attr("transform", `translate(0, ${i * 25})`)
-                        .style("cursor", "pointer")
-                        .on("click", function() {
-                            const isActive = d3.select(this).classed("active");
-                            d3.selectAll(".legend-item").classed("active", false);
+                    
+                    // Draw data paths
+                    const paths = radarG.selectAll(".lineGroup")
+                        .data(data1)
+                        .enter()
+                        .append("g")
+                        .attr("class", "lineGroup");
+                    
+                    // Path animation
+                    paths.append("path")
+                        .attr("d", d => {
+                            const lineGenerator = d3.lineRadial()
+                                .radius(a => 0) // Initial radius is 0
+                                .angle((a, i) => i * angleSlice)
+                                .curve(d3.curveCardinalClosed);
+                            return lineGenerator(allAxis);
+                        })
+                        .attr("stroke", (d, i) => colorScale1(i * 10))
+                        .attr("class", "line")
+                        .style("opacity", 0.8)
+                        .transition()
+                        .duration(1200)
+                        .delay((d, i) => i * 100 + 500)
+                        .ease(d3.easeCubicOut)
+                        .attrTween("d", function(d) {
+                            const interpolate = d3.interpolate(0, 1);
+                            return function(t) {
+                                const lineGenerator = d3.lineRadial()
+                                    .radius(a => rScale(d[a]) * interpolate(t))
+                                    .angle((a, i) => i * angleSlice)
+                                    .curve(d3.curveCardinalClosed);
+                                return lineGenerator(allAxis);
+                            };
+                        })
+                        .on("mouseover", function(event, d) {
+                            d3.selectAll(".line").classed("faded", true);
+                            d3.select(this).classed("faded", false).classed("highlight", true);
                             
-                            if (!isActive) {
-                                d3.select(this).classed("active", true);
-                                // Highlight selected approach
-                                const index = data1.findIndex(item => item.Approach === d.Approach);
-                                d3.selectAll(".line").classed("faded", true);
-                                d3.selectAll(".lineGroup").filter((item, i) => i === index)
-                                    .select(".line").classed("faded", false).classed("highlight", true);
-                            } else {
-                                // Restore all
-                                d3.selectAll(".line").classed("faded", false).classed("highlight", false);
-                            }
+                            // Add pulse animation
+                            d3.select(this)
+                                .transition()
+                                .duration(500)
+                                .ease(d3.easeElasticOut)
+                                .attr("stroke-width", 4);
+                        })
+                        .on("mouseout", function() {
+                            d3.selectAll(".line").classed("faded", false).classed("highlight", false);
+                            
+                            // Restore original width
+                            d3.select(this)
+                                .transition()
+                                .duration(300)
+                                .attr("stroke-width", 2);
                         });
                     
-                    legendItem.append("rect")
-                        .attr("width", 15)
-                        .attr("height", 15)
-                        .attr("fill", colorScale1(i))
-                        .attr("class", "legend-color");
+                    // Data point animation
+                    paths.selectAll(".dot")
+                        .data(d => allAxis.map(a => ({axis: a, value: d[a], Approach: d.Approach})))
+                        .enter()
+                        .append("circle")
+                        .attr("cx", d => 0)
+                        .attr("cy", d => 0)
+                        .attr("r", 0)
+                        .attr("fill", d => colorScale1(data1.findIndex(e => e.Approach === d.Approach) * 10))
+                        .attr("class", "dot")
+                        .transition()
+                        .duration(800)
+                        .delay((d, i) => i * 50 + 800)
+                        .ease(d3.easeElasticOut)
+                        .attr("cx", d => rScale(d.value) * Math.cos(allAxis.indexOf(d.axis) * angleSlice - Math.PI / 2))
+                        .attr("cy", d => rScale(d.value) * Math.sin(allAxis.indexOf(d.axis) * angleSlice - Math.PI / 2))
+                        .attr("r", 5)
+                        .on("mouseover", function(event, d) {
+                            d3.select(this)
+                                .transition()
+                                .duration(200)
+                                .attr("r", 8)
+                                .style("fill-opacity", 1);
+                            
+                            tooltip.transition()
+                                .duration(200)
+                                .style("opacity", 1)
+                                .style("transform", "translateY(0)");
+                            tooltip.html(`<h3>${d.Approach}</h3><p>${d.axis}: ${d.value}%</p>`)
+                                .style("left", (event.pageX + 10) + "px")
+                                .style("top", (event.pageY - 20) + "px");
+                        })
+                        .on("mousemove", function(event, d) {
+                            tooltip.style("left", (event.pageX + 10) + "px")
+                                .style("top", (event.pageY - 20) + "px");
+                        })
+                        .on("mouseout", function() {
+                            d3.select(this)
+                                .transition()
+                                .duration(300)
+                                .attr("r", 5)
+                                .style("fill-opacity", 0.8);
+                            
+                            tooltip.transition()
+                                .duration(200)
+                                .style("opacity", 0)
+                                .style("transform", "translateY(10px)");
+                        });
                     
-                    legendItem.append("text")
-                        .attr("x", 20)
-                        .attr("y", 12)
-                        .text(d.Approach)
-                        .style("font-size", "12px")
-                        .attr("class", "legend-item");
+                    // Update legend
+                    updateRadarLegend();
+                }, 300);
+            }
+
+            // Draw heatmap function for Data 1
+            function drawHeatmap(metric) {
+                const allAxis = metrics[metric];
+                
+                // Clear existing content
+                heatmapG.selectAll("*").remove();
+                
+                // Add loading animation
+                const loading = heatmapG.append("text")
+                    .attr("x", heatmapWidth / 2 - 80)
+                    .attr("y", heatmapHeight / 2)
+                    .attr("text-anchor", "middle")
+                    .attr("dy", "0.35em")
+                    .text("Loading...")
+                    .style("font-size", "16px")
+                    .style("fill", "#6c757d");
+                
+                // Delay drawing for loading effect
+                setTimeout(() => {
+                    loading.remove();
+                    
+                    // Calculate heatmap dimensions
+                    const cellWidth = (heatmapWidth - 100) / allAxis.length;
+                    const cellHeight = (heatmapHeight - 100) / data1.length;
+                    
+                    // Add X-axis labels
+                    allAxis.forEach((axis, i) => {
+                        heatmapG.append("text")
+                            .attr("x", i * cellWidth + cellWidth / 2)
+                            .attr("y", -10)
+                            .attr("text-anchor", "middle")
+                            .text(axis.replace("Std Acc - ", "").replace("CRR - ", "").replace("CRA - ", ""))
+                            .style("font-size", "12px")
+                            .style("fill", "#555")
+                            .style("opacity", 0)
+                            .transition()
+                            .duration(500)
+                            .delay(i * 100)
+                            .style("opacity", 1);
+                    });
+                    
+                    // Add Y-axis labels
+                    data1.forEach((d, i) => {
+                        heatmapG.append("text")
+                            .attr("x", -10)
+                            .attr("y", i * cellHeight + cellHeight / 2)
+                            .attr("text-anchor", "end")
+                            .attr("dy", "0.35em")
+                            .text(d.Approach)
+                            .style("font-size", "12px")
+                            .style("fill", "#555")
+                            .style("opacity", 0)
+                            .transition()
+                            .duration(500)
+                            .delay(i * 100)
+                            .style("opacity", 1);
+                    });
+                    
+                    // Draw heatmap cells
+                    const cells = heatmapG.selectAll(".heatmap-cell")
+                        .data(data1.flatMap((d, i) => 
+                            allAxis.map(axis => ({
+                                Approach: d.Approach,
+                                axis: axis,
+                                value: d[axis],
+                                x: allAxis.indexOf(axis),
+                                y: i
+                            }))
+                        ))
+                        .enter()
+                        .append("rect")
+                        .attr("class", "heatmap-cell")
+                        .attr("x", d => d.x * cellWidth)
+                        .attr("y", d => d.y * cellHeight)
+                        .attr("width", cellWidth)
+                        .attr("height", cellHeight)
+                        .attr("fill", "#f0f0f0") // Initial color
+                        .style("opacity", 0)
+                        .on("mouseover", function(event, d) {
+                            d3.select(this)
+                                .transition()
+                                .duration(200)
+                                .attr("stroke", "#333")
+                                .attr("stroke-width", 2);
+                            
+                            tooltip.transition()
+                                .duration(200)
+                                .style("opacity", 1)
+                                .style("transform", "translateY(0)");
+                            tooltip.html(`<h3>${d.Approach}</h3><p>${d.axis}: ${d.value}%</p>`)
+                                .style("left", (event.pageX + 10) + "px")
+                                .style("top", (event.pageY - 20) + "px");
+                        })
+                        .on("mousemove", function(event, d) {
+                            tooltip.style("left", (event.pageX + 10) + "px")
+                                .style("top", (event.pageY - 20) + "px");
+                        })
+                        .on("mouseout", function() {
+                            d3.select(this)
+                                .transition()
+                                .duration(300)
+                                .attr("stroke", "none");
+                            
+                            tooltip.transition()
+                                .duration(200)
+                                .style("opacity", 0)
+                                .style("transform", "translateY(10px)");
+                        });
+                    
+                    // Cell color animation
+                    cells.transition()
+                        .duration(800)
+                        .delay((d, i) => i * 30)
+                        .ease(d3.easeCubicOut)
+                        .style("opacity", 1)
+                        .attr("fill", d => colorScale1(d.value));
+                    
+                    // Add value labels
+                    heatmapG.selectAll(".cell-value")
+                        .data(data1.flatMap((d, i) => 
+                            allAxis.map(axis => ({
+                                Approach: d.Approach,
+                                axis: axis,
+                                value: d[axis],
+                                x: allAxis.indexOf(axis),
+                                y: i
+                            }))
+                        ))
+                        .enter()
+                        .append("text")
+                        .attr("class", "cell-value")
+                        .attr("x", d => d.x * cellWidth + cellWidth / 2)
+                        .attr("y", d => d.y * cellHeight + cellHeight / 2)
+                        .attr("text-anchor", "middle")
+                        .attr("dy", "0.35em")
+                        .text(d => d.value + "%")
+                        .style("font-size", "10px")
+                        .style("fill", d => d.value > 50 ? "white" : "black")
+                        .style("font-weight", "bold")
+                        .style("opacity", 0)
+                        .transition()
+                        .duration(500)
+                        .delay((d, i) => i * 30 + 400)
+                        .style("opacity", 1);
+                    
+                    // Update heatmap legend
+                    updateHeatmapLegend();
+                }, 300);
+            }
+
+            // Update radar chart legend for Data 1
+            function updateRadarLegend() {
+                const legend = d3.select("#radarLegend");
+                legend.selectAll("*").remove();
+                
+                const legendItems = legend.selectAll(".dashboard-legend-item")
+                    .data(data1)
+                    .enter()
+                    .append("div")
+                    .attr("class", "dashboard-legend-item")
+                    .on("click", function(event, d) {
+                        const isActive = d3.select(this).classed("active");
+                        d3.selectAll(".dashboard-legend-item").classed("active", false);
+                        
+                        if (!isActive) {
+                            d3.select(this).classed("active", true);
+                            // Highlight selected approach
+                            const index = data1.findIndex(item => item.Approach === d.Approach);
+                            d3.selectAll(".line").classed("faded", true);
+                            d3.selectAll(".lineGroup").filter((item, i) => i === index)
+                                .select(".line").classed("faded", false).classed("highlight", true);
+                        } else {
+                            // Restore all
+                            d3.selectAll(".line").classed("faded", false).classed("highlight", false);
+                        }
+                    });
+                    
+                legendItems.append("div")
+                    .attr("class", "dashboard-legend-color")
+                    .style("background-color", (d, i) => colorScale1(i * 10));
+                    
+                legendItems.append("span")
+                    .text(d => d.Approach);
+            }
+
+            // Update heatmap legend for Data 1
+            function updateHeatmapLegend() {
+                const legend = d3.select("#heatmapLegend");
+                legend.selectAll("*").remove();
+                
+                // Create color legend
+                const legendWidth = 300;
+                const legendHeight = 20;
+                
+                const legendSvg = legend.append("svg")
+                    .attr("width", legendWidth)
+                    .attr("height", legendHeight + 30);
+                
+                const defs = legendSvg.append("defs");
+                const gradient = defs.append("linearGradient")
+                    .attr("id", "heatmap-gradient")
+                    .attr("x1", "0%")
+                    .attr("y1", "0%")
+                    .attr("x2", "100%")
+                    .attr("y2", "0%");
+                
+                gradient.selectAll("stop")
+                    .data(d3.range(0, 1.01, 0.1))
+                    .enter().append("stop")
+                    .attr("offset", d => `${d * 100}%`)
+                    .attr("stop-color", d => colorScale1(d * 100));
+                
+                legendSvg.append("rect")
+                    .attr("x", 0)
+                    .attr("y", 0)
+                    .attr("width", legendWidth)
+                    .attr("height", legendHeight)
+                    .style("fill", "url(#heatmap-gradient)")
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .style("opacity", 1);
+                
+                // Add legend labels
+                const legendScale = d3.scaleLinear()
+                    .domain([0, 100])
+                    .range([0, legendWidth]);
+                
+                const legendAxis = d3.axisBottom(legendScale)
+                    .ticks(5)
+                    .tickFormat(d => d + "%");
+                
+                legendSvg.append("g")
+                    .attr("transform", `translate(0, ${legendHeight})`)
+                    .call(legendAxis)
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .delay(500)
+                    .style("opacity", 1);
+            }
+
+            // ------------------ Data 2: Adversarial Robustness Heatmap ------------------
+            function drawAdversarialRobustnessHeatmap() {
+                // Clear existing content
+                d3.select("#robustnessHeatmap").selectAll("*").remove();
+                d3.select("#robustnessLegend").selectAll("*").remove();
+                
+                // Set dimensions and margins for Data 2
+                const margin = { top: 80, right: 150, bottom: 100, left: 150 };
+                const width = 1000 - margin.left - margin.right;
+                const height = 800 - margin.top - margin.bottom;
+
+                // Create SVG for Data 2
+                const robustnessSvg = d3.select("#robustnessHeatmap")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+                // Extract defense model names (all columns except "attack")
+                const defenseModels = Object.keys(data2[0]).filter(key => key !== "attack");
+                const attackMethods = data2.map(d => d.attack);
+
+                // Create scales for Data 2
+                const xScale = d3.scaleBand()
+                    .domain(defenseModels)
+                    .range([0, width])
+                    .padding(0.05);
+
+                const yScale = d3.scaleBand()
+                    .domain(attackMethods)
+                    .range([0, height])
+                    .padding(0.05);
+
+                const colorScale2 = d3.scaleSequential(d3.interpolateRdYlGn)
+                    .domain([0, 100]);
+
+                // Add X axis with transition for Data 2
+                robustnessSvg.append("g")
+                    .attr("transform", `translate(0,${height})`)
+                    .call(d3.axisBottom(xScale))
+                    .selectAll("text")
+                    .attr("transform", "rotate(-45)")
+                    .style("text-anchor", "end")
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em")
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .style("opacity", 1);
+
+                // Add Y axis with transition for Data 2
+                robustnessSvg.append("g")
+                    .call(d3.axisLeft(yScale))
+                    .selectAll("text")
+                    .style("text-anchor", "end")
+                    .attr("dx", "-.8em")
+                    .attr("dy", ".15em")
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .delay(100)
+                    .style("opacity", 1);
+
+                // Add X axis label for Data 2
+                robustnessSvg.append("text")
+                    .attr("class", "axis-label")
+                    .attr("text-anchor", "middle")
+                    .attr("x", width / 2)
+                    .attr("y", height + 50)
+                    .text("Defense Models")
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .delay(400)
+                    .style("opacity", 1);
+
+                // Add Y axis label for Data 2
+                robustnessSvg.append("text")
+                    .attr("class", "axis-label")
+                    .attr("text-anchor", "middle")
+                    .attr("transform", "rotate(-90)")
+                    .attr("x", -height / 2)
+                    .attr("y", -100)
+                    .text("Attack Methods")
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .delay(400)
+                    .style("opacity", 1);
+
+                // Create heatmap cells with transitions for Data 2
+                data2.forEach(d => {
+                    const attack = d.attack;
+                    defenseModels.forEach(model => {
+                        const value = d[model];
+                        
+                        // Create rectangle with initial state
+                        const rect = robustnessSvg.append("rect")
+                            .attr("x", xScale(model))
+                            .attr("y", yScale(attack))
+                            .attr("width", xScale.bandwidth())
+                            .attr("height", yScale.bandwidth())
+                            .attr("fill", colorScale2(value))
+                            .style("stroke", "#fff")
+                            .style("stroke-width", 1)
+                            .style("opacity", 0)
+                            .attr("class", "cell")
+                            .on("mouseover", function(event) {
+                                tooltip
+                                    .style("opacity", 1)
+                                    .html(`<strong>${attack} vs ${model}</strong><br>Accuracy: ${value}%`)
+                                    .style("left", (event.pageX + 10) + "px")
+                                    .style("top", (event.pageY - 28) + "px");
+                                
+                                d3.select(this)
+                                    .transition()
+                                    .duration(200)
+                                    .style("stroke", "#333")
+                                    .style("stroke-width", 2);
+                            })
+                            .on("mouseout", function() {
+                                tooltip.style("opacity", 0);
+                                d3.select(this)
+                                    .transition()
+                                    .duration(200)
+                                    .style("stroke", "#fff")
+                                    .style("stroke-width", 1);
+                            });
+                        
+                        // Animate rectangles
+                        rect.transition()
+                            .duration(600)
+                            .delay((yScale(attack) / height) * 1000) // Stagger based on position
+                            .style("opacity", 1);
+                        
+                        // Add text label with initial state
+                        const text = robustnessSvg.append("text")
+                            .attr("x", xScale(model) + xScale.bandwidth() / 2)
+                            .attr("y", yScale(attack) + yScale.bandwidth() / 2)
+                            .attr("text-anchor", "middle")
+                            .attr("dy", "0.35em")
+                            .attr("font-size", "10px")
+                            .attr("font-weight", value < 50 ? "bold" : "normal")
+                            .attr("fill", value < 50 ? "white" : "black")
+                            .text(value)
+                            .style("opacity", 0);
+                        
+                        // Animate text
+                        text.transition()
+                            .duration(400)
+                            .delay((yScale(attack) / height) * 1000 + 300) // Slightly after rectangles
+                            .style("opacity", 1);
+                    });
                 });
+
+                // Add title with transition for Data 2
+                robustnessSvg.append("text")
+                    .attr("x", width / 2)
+                    .attr("y", -40)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "20px")
+                    .style("font-weight", "bold")
+                    .text("Adversarial Robustness Heatmap")
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(1000)
+                    .style("opacity", 1);
+
+                // Create legend for Data 2
+                const legendWidth = 300;
+                const legendHeight = 20;
+                
+                const legendSvg = d3.select("#robustnessLegend")
+                    .append("svg")
+                    .attr("width", legendWidth)
+                    .attr("height", 50);
+                
+                const legendScale = d3.scaleLinear()
+                    .domain([0, 100])
+                    .range([0, legendWidth]);
+                
+                const legendAxis = d3.axisBottom(legendScale)
+                    .ticks(5);
+                
+                const defs = legendSvg.append("defs");
+                
+                const linearGradient = defs.append("linearGradient")
+                    .attr("id", "linear-gradient")
+                    .attr("x1", "0%")
+                    .attr("y1", "0%")
+                    .attr("x2", "100%")
+                    .attr("y2", "0%");
+                
+                // Add gradient stops
+                const stops = [0, 0.2, 0.4, 0.6, 0.8, 1];
+                stops.forEach((stop, i) => {
+                    linearGradient.append("stop")
+                        .attr("offset", `${stop * 100}%`)
+                        .attr("stop-color", d3.interpolateRdYlGn(stop));
+                });
+                
+                // Add gradient rectangle with transition
+                legendSvg.append("rect")
+                    .attr("x", 0)
+                    .attr("y", 0)
+                    .attr("width", legendWidth)
+                    .attr("height", legendHeight)
+                    .style("fill", "url(#linear-gradient)")
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .delay(800)
+                    .style("opacity", 1);
+                
+                // Add legend axis with transition
+                legendSvg.append("g")
+                    .attr("transform", `translate(0,${legendHeight})`)
+                    .call(legendAxis)
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .delay(1000)
+                    .style("opacity", 1);
+                
+                // Add legend label with transition
+                legendSvg.append("text")
+                    .attr("x", legendWidth / 2)
+                    .attr("y", legendHeight + 30)
+                    .attr("text-anchor", "middle")
+                    .text("Accuracy (%)")
+                    .style("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .delay(1200)
+                    .style("opacity", 1);
             }
 
             // ------------------ Initialization for Data 1 ------------------
             drawRadar("Standard");
+            drawHeatmap("Standard");
+            drawAdversarialRobustnessHeatmap();
 
             // Metric dropdown for Data 1
             d3.select("#metricSelect").on("change", function(){
                 const metric = this.value;
-                drawRadar(metric);
+                
+                // Add transition animation
+                d3.selectAll(".model-chart")
+                    .transition()
+                    .duration(300)
+                    .style("opacity", 0.5)
+                    .on("end", function() {
+                        drawRadar(metric);
+                        drawHeatmap(metric);
+                        
+                        d3.selectAll(".model-chart")
+                            .transition()
+                            .duration(300)
+                            .style("opacity", 1);
+                    });
+            });
+
+            // Model dropdown for Data 1
+            const modelSelect = d3.select("#modelFilter");
+
+            modelSelect.on("change", function(){
+                const selected = this.value;
+                
+                radarG.selectAll(".lineGroup")
+                    .transition()
+                    .duration(500)
+                    .style("opacity", d => (selected === "All" || d.Approach === selected) ? 1 : 0.1);
             });
         }
     </script>
